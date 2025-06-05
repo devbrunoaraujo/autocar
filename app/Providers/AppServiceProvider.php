@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\FipeApiInterface;
-use App\Services\FipeApiService;
+use App\Services\FipeApiServices;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(FipeApiInterface::class, FipeApiService::class);
+        $this->app->bind(FipeApiInterface::class, FipeApiServices::class);
     }
 
     /**

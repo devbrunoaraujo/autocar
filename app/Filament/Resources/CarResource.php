@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CarResource\Pages;
 use App\Filament\Resources\CarResource\RelationManagers;
 use App\Models\Car;
+use App\Contracts\FipeApiInterface;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Select;
 
 class CarResource extends Resource
 {
@@ -23,17 +27,55 @@ class CarResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('marca')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('modelo')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('ano')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('preco')
-                    ->numeric(),
+                Forms\Components\Select::make('marca')
+                    ->label('Marca')
+                    ->options(function () {
+                        return app(FipeApiInterface::class)->listarMarcas();
+                        })
+                    //->options(fn() => app(FipeApiInterface::class)->listarMarcas())
+                    ->reactive()
+                    ->afterStateUpdated(fn(callable $set) => $set('modelo', null)),
+
+                Forms\Components\Select::make('modelo')
+                    ->label('Modelo')
+                    ->options(function (callable $get) {
+                        $marca = $get('marca');
+                        if (!$marca) return [];
+                        return app(FipeApiInterface::class)->listarModelos($marca);
+                    })
+                    ->reactive()
+                    ->afterStateUpdated(fn(callable $set) => $set('ano', null)),
+
+                Forms\Components\Select::make('ano')
+                    ->label('Ano')
+                    ->options(function (callable $get) {
+                        $marca = $get('marca');
+                        $modelo = $get('modelo');
+                        if (!$marca || !$modelo) return [];
+                        return app(FipeApiInterface::class)->listarAnos($marca, $modelo);
+                    })
+                    ->reactive(),
+
+                Placeholder::make('preco_fipe')
+                    ->label('Preço FIPE')
+                    ->content(function (callable $get) {
+                        $marca = $get('marca');
+                        $modelo = $get('modelo');
+                        $ano = $get('ano');
+
+                        if (!$marca || !$modelo || !$ano) return 'Selecione todos os campos';
+
+                        $result = app(FipeApiInterface::class)
+                            ->consultarPreco($marca, $modelo, $ano);
+
+                        return $result['Valor'] ?? 'Preço não encontrado';
+                    }),
+
+                TextInput::make('preco')
+                    ->label('Preço Final (opcional)')
+                    ->numeric()
+                    ->prefix('R$')
+                    ->nullable()
             ]);
     }
 
