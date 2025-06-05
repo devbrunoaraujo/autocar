@@ -6,5 +6,11 @@ git branch -M main
 
 composer require filament/filament:"^3.3" -W
 php artisan filament:install --panels
+
+php artisan make:model Car -m
+php artisan migrate
 php artisan make:filament-user
+
+php artisan make:filament-resource Car --generate
+
 
