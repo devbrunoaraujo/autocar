@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Contracts\FipeApiInterface;
 use Illuminate\Support\Facades\Http;
 
-class FipeCarroApiService implements FipeApiInterface
+class FipeApiService implements FipeApiInterface
 {
     protected string $baseUrl;
 
