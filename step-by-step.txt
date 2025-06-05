@@ -1,0 +1,10 @@
+composer create-project laravel/laravel project_name
+
+git init
+
+git branch -M main
+
+composer require filament/filament:"^3.3" -W
+php artisan filament:install --panels
+php artisan make:filament-user
+
