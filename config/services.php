@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'fipe' => [
+        'base_url' => env('FIPE_API_BASE_URL'),
+    ],
+
+
 ];
