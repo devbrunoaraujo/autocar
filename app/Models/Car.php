@@ -11,7 +11,10 @@ class Car extends Model
         'marca',
         'modelo',
         'ano',
-        'preco'
+        'preco',
+        'marca_nome',
+        'modelo_nome',
+        'ano_nome'
     ];
 
     public function options(): BelongsToMany

@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Contracts\FipeApiInterface;
 //use //App\Helpers\FormMasks;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -83,9 +84,9 @@ class CarResource extends Resource
                             }),
 
                         // Campos ocultos que serão preenchidos e salvos no banco
-                        TextInput::make('marca_nome')->readOnly(),
-                        TextInput::make('modelo_nome')->readOnly(),
-                        TextInput::make('ano_nome')->readOnly(),
+                        Hidden::make('marca_nome')->dehydrated(),
+                        Hidden::make('modelo_nome'),
+                        Hidden::make('ano_nome'),
 
                         Forms\Components\CheckboxList::make('options')
                             ->label('Opcionais')
