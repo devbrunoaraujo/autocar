@@ -13,7 +13,7 @@ class OptionsSeeder extends Seeder
      */
     public function run(): void
     {
-        $opcionais = [
+        $options = [
             'Ar-condicionado',
             'Direção hidráulica',
             'Direção elétrica',
@@ -55,9 +55,9 @@ class OptionsSeeder extends Seeder
             'Lanternas em LED',
         ];
 
-        foreach ($opcionais as $nome) {
-            DB::table('opcionais')->insert([
-                'nome' => $nome,
+        foreach ($options as $name) {
+            DB::table('options')->insert([
+                'name' => $name,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -36,7 +36,14 @@ class CarResource extends Resource
                             ->label('Marca')
                             ->options(fn() => app(FipeApiInterface::class)->listarMarcas())
                             ->reactive()
-                            ->afterStateUpdated(fn(callable $set) => $set('modelo', null)),
+                            ->afterStateUpdated(function (callable $get, callable $set) {
+                                $marca = $get('marca');
+                                $set('modelo', null);
+                                if ($marca) {
+                                    $marcaNome = app(FipeApiInterface::class)->listarMarcas()[$marca] ?? null;
+                                    $set('marca_nome', $marcaNome);
+                                }
+                            }),
 
                         Forms\Components\Select::make('modelo')
                             ->label('Modelo')
@@ -46,7 +53,15 @@ class CarResource extends Resource
                                 return app(FipeApiInterface::class)->listarModelos($marca);
                             })
                             ->reactive()
-                            ->afterStateUpdated(fn(callable $set) => $set('ano', null)),
+                            ->afterStateUpdated(function (callable $get, callable $set) {
+                                $marca = $get('marca');
+                                $modelo = $get('modelo');
+                                $set('ano', null);
+                                if ($marca && $modelo) {
+                                    $modeloNome = app(FipeApiInterface::class)->listarModelos($marca)[$modelo] ?? null;
+                                    $set('modelo_nome', $modeloNome);
+                                }
+                            }),
 
                         Forms\Components\Select::make('ano')
                             ->label('Ano')
@@ -56,7 +71,29 @@ class CarResource extends Resource
                                 if (!$marca || !$modelo) return [];
                                 return app(FipeApiInterface::class)->listarAnos($marca, $modelo);
                             })
-                            ->reactive(),
+                            ->reactive()
+                            ->afterStateUpdated(function (callable $get, callable $set) {
+                                $marca = $get('marca');
+                                $modelo = $get('modelo');
+                                $ano = $get('ano');
+                                if ($marca && $modelo && $ano) {
+                                    $anoNome = app(FipeApiInterface::class)->listarAnos($marca, $modelo)[$ano] ?? null;
+                                    $set('ano_nome', $anoNome);
+                                }
+                            }),
+
+                        // Campos ocultos que serão preenchidos e salvos no banco
+                        TextInput::make('marca_nome')->readOnly(),
+                        TextInput::make('modelo_nome')->readOnly(),
+                        TextInput::make('ano_nome')->readOnly(),
+
+                        Forms\Components\CheckboxList::make('options')
+                            ->label('Opcionais')
+                            ->relationship('options', 'name')
+                            ->columns(4)
+                            ->searchable()
+                            ->bulkToggleable()
+                            ->helperText('Selecione os opcionais disponíveis para este carro.'),
 
                         Forms\Components\Placeholder::make('preco_fipe')
                             ->label('Preço FIPE')
@@ -64,9 +101,7 @@ class CarResource extends Resource
                                 $marca = $get('marca');
                                 $modelo = $get('modelo');
                                 $ano = $get('ano');
-
                                 if (!$marca || !$modelo || !$ano) return 'Selecione todos os campos';
-
                                 $result = app(FipeApiInterface::class)->consultarPreco($marca, $modelo, $ano);
                                 return $result['Valor'] ?? 'Preço não encontrado';
                             }),
@@ -74,12 +109,11 @@ class CarResource extends Resource
                         Forms\Components\TextInput::make('preco')
                             ->label('Preço Final (opcional)')
                             ->prefix('R$')
-                            ->mask('999.999,99', '.', ',', 2)
                             ->nullable(),
 
                         Forms\Components\MarkdownEditor::make('content'),
                     ])
-                    ->columns(2) // Se quiser organizar os campos em colunas
+                    ->columns(1),
             ]);
     }
 
@@ -88,34 +122,46 @@ class CarResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('marca')
+                Tables\Columns\TextColumn::make('marca_nome')
+                    ->label('Marca')
+                    ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('modelo')
+
+                Tables\Columns\TextColumn::make('modelo_nome')
+                    ->label('Modelo')
+                    ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('ano')
+
+                Tables\Columns\TextColumn::make('ano_nome')
+                    ->label('Ano')
+                    ->sortable()
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('preco')
-                    ->numeric()
+                    ->label('Preço Final')
+                    ->money('BRL', locale: 'pt_BR')
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Atualizado em')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
             ])
             ->filters([
-                //
+                // Aqui você pode adicionar filtros por marca, modelo, ano ou outros
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
