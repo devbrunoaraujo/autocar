@@ -8,9 +8,18 @@ composer require filament/filament:"^3.3" -W
 php artisan filament:install --panels
 
 php artisan make:model Car -m
+
+#criação da migration cars
+
 php artisan migrate
 php artisan make:filament-user
 
 php artisan make:filament-resource Car --generate
+
+# criar interface FipeCarInterface
+# criar a classe de serviço FipeApiService
+# registrar no .env a url da api
+# registar no arquivo config/services a base_url da api
+
 
 

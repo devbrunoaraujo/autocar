@@ -77,7 +77,7 @@ class CarResource extends Resource
                     ->prefix('R$')
                     ->nullable()
             ]);
-    }
+    }  
 
     public static function table(Table $table): Table
     {
