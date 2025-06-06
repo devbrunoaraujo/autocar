@@ -6,6 +6,7 @@ use App\Filament\Resources\CarResource\Pages;
 use App\Filament\Resources\CarResource\RelationManagers;
 use App\Models\Car;
 use App\Contracts\FipeApiInterface;
+//use //App\Helpers\FormMasks;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -56,7 +57,7 @@ class CarResource extends Resource
                     })
                     ->reactive(),
 
-                Placeholder::make('preco_fipe')
+               Forms\Components\Placeholder::make('preco_fipe')
                     ->label('Preço FIPE')
                     ->content(function (callable $get) {
                         $marca = $get('marca');
@@ -71,10 +72,11 @@ class CarResource extends Resource
                         return $result['Valor'] ?? 'Preço não encontrado';
                     }),
 
-                TextInput::make('preco')
+                Forms\Components\TextInput::make('preco')
                     ->label('Preço Final (opcional)')
-                    ->numeric()
                     ->prefix('R$')
+                    //->decimal()
+                    ->mask('999.999,99','.',',',2)
                     ->nullable()
             ]);
     }  
