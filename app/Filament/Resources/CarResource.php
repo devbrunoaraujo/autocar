@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Contracts\FipeApiInterface;
 //use //App\Helpers\FormMasks;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\MarkdownEditor;
 
 class CarResource extends Resource
 {
@@ -28,58 +30,59 @@ class CarResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('marca')
-                    ->label('Marca')
-                    ->options(function () {
-                        return app(FipeApiInterface::class)->listarMarcas();
-                        })
-                    //->options(fn() => app(FipeApiInterface::class)->listarMarcas())
-                    ->reactive()
-                    ->afterStateUpdated(fn(callable $set) => $set('modelo', null)),
+                Section::make('Informações do Veículo')
+                    ->schema([
+                        Forms\Components\Select::make('marca')
+                            ->label('Marca')
+                            ->options(fn() => app(FipeApiInterface::class)->listarMarcas())
+                            ->reactive()
+                            ->afterStateUpdated(fn(callable $set) => $set('modelo', null)),
 
-                Forms\Components\Select::make('modelo')
-                    ->label('Modelo')
-                    ->options(function (callable $get) {
-                        $marca = $get('marca');
-                        if (!$marca) return [];
-                        return app(FipeApiInterface::class)->listarModelos($marca);
-                    })
-                    ->reactive()
-                    ->afterStateUpdated(fn(callable $set) => $set('ano', null)),
+                        Forms\Components\Select::make('modelo')
+                            ->label('Modelo')
+                            ->options(function (callable $get) {
+                                $marca = $get('marca');
+                                if (!$marca) return [];
+                                return app(FipeApiInterface::class)->listarModelos($marca);
+                            })
+                            ->reactive()
+                            ->afterStateUpdated(fn(callable $set) => $set('ano', null)),
 
-                Forms\Components\Select::make('ano')
-                    ->label('Ano')
-                    ->options(function (callable $get) {
-                        $marca = $get('marca');
-                        $modelo = $get('modelo');
-                        if (!$marca || !$modelo) return [];
-                        return app(FipeApiInterface::class)->listarAnos($marca, $modelo);
-                    })
-                    ->reactive(),
+                        Forms\Components\Select::make('ano')
+                            ->label('Ano')
+                            ->options(function (callable $get) {
+                                $marca = $get('marca');
+                                $modelo = $get('modelo');
+                                if (!$marca || !$modelo) return [];
+                                return app(FipeApiInterface::class)->listarAnos($marca, $modelo);
+                            })
+                            ->reactive(),
 
-               Forms\Components\Placeholder::make('preco_fipe')
-                    ->label('Preço FIPE')
-                    ->content(function (callable $get) {
-                        $marca = $get('marca');
-                        $modelo = $get('modelo');
-                        $ano = $get('ano');
+                        Forms\Components\Placeholder::make('preco_fipe')
+                            ->label('Preço FIPE')
+                            ->content(function (callable $get) {
+                                $marca = $get('marca');
+                                $modelo = $get('modelo');
+                                $ano = $get('ano');
 
-                        if (!$marca || !$modelo || !$ano) return 'Selecione todos os campos';
+                                if (!$marca || !$modelo || !$ano) return 'Selecione todos os campos';
 
-                        $result = app(FipeApiInterface::class)
-                            ->consultarPreco($marca, $modelo, $ano);
+                                $result = app(FipeApiInterface::class)->consultarPreco($marca, $modelo, $ano);
+                                return $result['Valor'] ?? 'Preço não encontrado';
+                            }),
 
-                        return $result['Valor'] ?? 'Preço não encontrado';
-                    }),
+                        Forms\Components\TextInput::make('preco')
+                            ->label('Preço Final (opcional)')
+                            ->prefix('R$')
+                            ->mask('999.999,99', '.', ',', 2)
+                            ->nullable(),
 
-                Forms\Components\TextInput::make('preco')
-                    ->label('Preço Final (opcional)')
-                    ->prefix('R$')
-                    //->decimal()
-                    ->mask('999.999,99','.',',',2)
-                    ->nullable()
+                        Forms\Components\MarkdownEditor::make('content'),
+                    ])
+                    ->columns(2) // Se quiser organizar os campos em colunas
             ]);
-    }  
+    }
+
 
     public static function table(Table $table): Table
     {
