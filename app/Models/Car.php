@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
+
 
 class Car extends Model
 {
@@ -27,11 +29,11 @@ class Car extends Model
 {
     static::deleting(function ($car) {
         if ($car->thumb) {
-            \Storage::disk('public')->delete($car->thumb);
+            Storage::disk('public')->delete($car->thumb);
         }
         if (is_array($car->images)) {
             foreach ($car->images as $image) {
-                \Storage::disk('public')->delete($image);
+                Storage::disk('public')->delete($image);
             }
         }
     });

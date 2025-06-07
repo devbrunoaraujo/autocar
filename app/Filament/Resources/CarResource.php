@@ -20,7 +20,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\MarkdownEditor;
-use Illuminate\Container\Attributes\Storage;
+use Illuminate\Support\Facades\Storage;
+
 
 class CarResource extends Resource
 {
@@ -140,7 +141,7 @@ class CarResource extends Resource
                             ->imagePreviewHeight('150')
                             ->dehydrated()
                             ->deleteUploadedFileUsing(function ($file) {
-                                \Storage::disk('public')->delete($file);
+                                Storage::disk('public')->delete($file);
                             }),
 
 
@@ -159,7 +160,7 @@ class CarResource extends Resource
                             ->visibility('public')
                             ->dehydrated()
                             ->deleteUploadedFileUsing(function ($file) {
-                                \Storage::disk('public')->delete($file);
+                                Storage::disk('public')->delete($file);
                             }),
                     ])
                     ->columns(1),
