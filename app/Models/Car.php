@@ -19,6 +19,6 @@ class Car extends Model
 
     public function options(): BelongsToMany
     {
-        return $this->belongsToMany(Options::class, 'car_options');
+        return $this->belongsToMany(Options::class);
     }
 }

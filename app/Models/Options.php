@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Options extends Model
 {
+     protected $fillable = [
+        'car_id',
+        'options_id'
+    ];
 
     public function cars(): BelongsToMany
     {
