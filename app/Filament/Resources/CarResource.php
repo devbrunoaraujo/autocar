@@ -20,6 +20,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\MarkdownEditor;
+use Illuminate\Container\Attributes\Storage;
 
 class CarResource extends Resource
 {
@@ -31,8 +32,11 @@ class CarResource extends Resource
     {
         return $form
             ->schema([
+
                 Section::make('Informações do Veículo')
                     ->schema([
+
+                        //select marca
                         Forms\Components\Select::make('marca')
                             ->label('Marca')
                             ->options(fn() => app(FipeApiInterface::class)->listarMarcas())
@@ -46,6 +50,8 @@ class CarResource extends Resource
                                 }
                             }),
 
+
+                        //Select modelo
                         Forms\Components\Select::make('modelo')
                             ->label('Modelo')
                             ->options(function (callable $get) {
@@ -64,6 +70,8 @@ class CarResource extends Resource
                                 }
                             }),
 
+
+                        //select ano
                         Forms\Components\Select::make('ano')
                             ->label('Ano')
                             ->options(function (callable $get) {
@@ -83,11 +91,15 @@ class CarResource extends Resource
                                 }
                             }),
 
+
+
                         // Campos ocultos que serão preenchidos e salvos no banco
-                        Hidden::make('marca_nome')->dehydrated(),
+                        Hidden::make('marca_nome'),
                         Hidden::make('modelo_nome'),
                         Hidden::make('ano_nome'),
 
+
+                        //options que carregaos opcionais
                         Forms\Components\CheckboxList::make('options')
                             ->label('Opcionais')
                             ->relationship('options', 'name')
@@ -96,6 +108,8 @@ class CarResource extends Resource
                             ->bulkToggleable()
                             ->helperText('Selecione os opcionais disponíveis para este carro.'),
 
+
+                        //
                         Forms\Components\Placeholder::make('preco_fipe')
                             ->label('Preço FIPE')
                             ->content(function (callable $get) {
@@ -107,12 +121,46 @@ class CarResource extends Resource
                                 return $result['Valor'] ?? 'Preço não encontrado';
                             }),
 
+
+
                         Forms\Components\TextInput::make('preco')
                             ->label('Preço Final (opcional)')
                             ->prefix('R$')
                             ->nullable(),
 
-                        Forms\Components\MarkdownEditor::make('content'),
+
+
+                        Forms\Components\FileUpload::make('thumb')
+                            ->label('Thumb')
+                            ->image()
+                            ->disk('public')
+                            ->directory('carros/thumbs')
+                            ->preserveFilenames()
+                            ->visibility('public')
+                            ->imagePreviewHeight('150')
+                            ->dehydrated()
+                            ->deleteUploadedFileUsing(function ($file) {
+                                \Storage::disk('public')->delete($file);
+                            }),
+
+
+
+                        Forms\Components\FileUpload::make('images')
+                            ->label('Imagens do veículo')
+                            ->multiple()
+                            ->image()
+                            ->directory('carros/galeria')
+                            ->imagePreviewHeight('150')
+                            ->maxSize(2048)
+                            ->helperText('Você pode enviar múltiplas imagens do carro.')
+                            ->reorderable()
+                            ->preserveFilenames()
+                            ->disk('public')
+                            ->visibility('public')
+                            ->dehydrated()
+                            ->deleteUploadedFileUsing(function ($file) {
+                                \Storage::disk('public')->delete($file);
+                            }),
                     ])
                     ->columns(1),
             ]);
@@ -123,6 +171,13 @@ class CarResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('thumb')
+                    ->label('Thumb')
+                    ->circular()
+                    ->disk('public')
+                    ->visibility('visible')
+                    ->size(50),
+
                 Tables\Columns\TextColumn::make('marca_nome')
                     ->label('Marca')
                     ->sortable()
@@ -141,16 +196,6 @@ class CarResource extends Resource
                 Tables\Columns\TextColumn::make('preco')
                     ->label('Preço Final')
                     ->money('BRL', locale: 'pt_BR')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Criado em')
-                    ->dateTime('d/m/Y H:i')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Atualizado em')
-                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->filters([
