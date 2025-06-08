@@ -120,6 +120,7 @@ class CarResource extends Resource
 
                         Forms\Components\TextInput::make('preco')
                             ->label('Preço Final')
+                            ->numeric()
                             ->prefix('R$')
                             ->required(),
 
@@ -127,6 +128,7 @@ class CarResource extends Resource
                     ->columns(1),
 
                 Fieldset::make('Galeria do Veículo')
+
                     ->schema([
                         //Galeria do veículo
                         Forms\Components\FileUpload::make('thumb')
@@ -147,6 +149,13 @@ class CarResource extends Resource
                             ->label('Imagens do veículo')
                             ->multiple()
                             ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                null,
+                                '16:9',
+                                '4:3',
+                                '1:1',
+                            ])
                             ->directory('carros/galeria')
                             ->imagePreviewHeight('150')
                             ->maxSize(2048)
@@ -162,6 +171,7 @@ class CarResource extends Resource
 
 
                     ])->columns(1),
+
 
                 Fieldset::make('Opcionais')
                     ->schema([
