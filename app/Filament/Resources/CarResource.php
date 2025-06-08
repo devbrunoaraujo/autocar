@@ -6,8 +6,8 @@ use App\Filament\Resources\CarResource\Pages;
 use App\Filament\Resources\CarResource\RelationManagers;
 use App\Models\Car;
 use App\Contracts\FipeApiInterface;
-//use //App\Helpers\FormMasks;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -34,14 +34,17 @@ class CarResource extends Resource
         return $form
             ->schema([
 
-                Section::make('Informações do Veículo')
+                Fieldset::make('Informações do Veículo')
                     ->schema([
 
                         //select marca
                         Forms\Components\Select::make('marca')
                             ->label('Marca')
                             ->options(fn() => app(FipeApiInterface::class)->listarMarcas())
+                            ->searchable()
+                            ->preload()
                             ->reactive()
+                            ->required()
                             ->afterStateUpdated(function (callable $get, callable $set) {
                                 $marca = $get('marca');
                                 $set('modelo', null);
@@ -60,7 +63,10 @@ class CarResource extends Resource
                                 if (!$marca) return [];
                                 return app(FipeApiInterface::class)->listarModelos($marca);
                             })
+                            ->searchable()
+                            ->preload()
                             ->reactive()
+                            ->required()
                             ->afterStateUpdated(function (callable $get, callable $set) {
                                 $marca = $get('marca');
                                 $modelo = $get('modelo');
@@ -82,6 +88,7 @@ class CarResource extends Resource
                                 return app(FipeApiInterface::class)->listarAnos($marca, $modelo);
                             })
                             ->reactive()
+                            ->required()
                             ->afterStateUpdated(function (callable $get, callable $set) {
                                 $marca = $get('marca');
                                 $modelo = $get('modelo');
@@ -93,24 +100,13 @@ class CarResource extends Resource
                             }),
 
 
-
                         // Campos ocultos que serão preenchidos e salvos no banco
                         Hidden::make('marca_nome'),
                         Hidden::make('modelo_nome'),
                         Hidden::make('ano_nome'),
 
 
-                        //options que carregaos opcionais
-                        Forms\Components\CheckboxList::make('options')
-                            ->label('Opcionais')
-                            ->relationship('options', 'name')
-                            ->columns(4)
-                            ->searchable()
-                            ->bulkToggleable()
-                            ->helperText('Selecione os opcionais disponíveis para este carro.'),
-
-
-                        //
+                        //preço fipe
                         Forms\Components\Placeholder::make('preco_fipe')
                             ->label('Preço FIPE')
                             ->content(function (callable $get) {
@@ -122,15 +118,17 @@ class CarResource extends Resource
                                 return $result['Valor'] ?? 'Preço não encontrado';
                             }),
 
-
-
                         Forms\Components\TextInput::make('preco')
-                            ->label('Preço Final (opcional)')
+                            ->label('Preço Final')
                             ->prefix('R$')
-                            ->nullable(),
+                            ->required(),
 
+                    ])
+                    ->columns(1),
 
-
+                Fieldset::make('Galeria do Veículo')
+                    ->schema([
+                        //Galeria do veículo
                         Forms\Components\FileUpload::make('thumb')
                             ->label('Thumb')
                             ->image()
@@ -144,8 +142,7 @@ class CarResource extends Resource
                                 Storage::disk('public')->delete($file);
                             }),
 
-
-
+                        //Thumb que aparece na tabela
                         Forms\Components\FileUpload::make('images')
                             ->label('Imagens do veículo')
                             ->multiple()
@@ -162,8 +159,24 @@ class CarResource extends Resource
                             ->deleteUploadedFileUsing(function ($file) {
                                 Storage::disk('public')->delete($file);
                             }),
-                    ])
-                    ->columns(1),
+
+
+                    ])->columns(1),
+
+                Fieldset::make('Opcionais')
+                    ->schema([
+
+                        //options que carrega os opcionais
+                        Forms\Components\CheckboxList::make('options')
+                            ->label('Opcionais')
+                            ->relationship('options', 'name')
+                            ->columns(4)
+                            ->searchable()
+                            ->bulkToggleable()
+                            ->helperText('Selecione os opcionais disponíveis para este carro.'),
+
+                    ])->columns(1)
+
             ]);
     }
 
