@@ -20,6 +20,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $modelLabel = 'Usuário';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -27,6 +29,7 @@ class UserResource extends Resource
                 Fieldset::make('Usuários')
                     ->schema([
                         Forms\Components\TextInput::make('name')
+                            ->label('Nome')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('email')
@@ -37,12 +40,14 @@ class UserResource extends Resource
 
                         Forms\Components\TextInput::make('password')
                             ->password()
+                            ->label('Senha')
                             ->required(fn(string $operation): bool => $operation === 'create')
                             ->dehydrated(fn(?string $state) => filled($state))
                             ->confirmed()
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('password_confirmation')
+                            ->label('Confirmar senha')
                             ->password()
                             ->requiredWith('password')
                             ->dehydrated(false),
