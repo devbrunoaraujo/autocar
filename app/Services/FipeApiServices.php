@@ -19,7 +19,7 @@ class FipeApiServices implements FipeApiInterface
     public function listarMarcas(): array
     {
         try {
-            $response = Http::timeout(5)->get("https://parallelum.com.br/fipe/api/v1/carros/marcas");
+            $response = Http::timeout(3)->get("https://parallelum.com.br/fipe/api/v1/carros/marcas");
 
             if ($response->successful()) {
                 return collect($response->json())->pluck('nome', 'codigo')->toArray();
@@ -36,7 +36,7 @@ class FipeApiServices implements FipeApiInterface
     public function listarModelos(string $marca): array
     {
         try {
-            $response = Http::timeout(8)->get("https://parallelum.com.br/fipe/api/v1/carros/marcas/{$marca}/modelos");
+            $response = Http::timeout(3)->get("https://parallelum.com.br/fipe/api/v1/carros/marcas/{$marca}/modelos");
 
             if ($response->successful()) {
                 return collect($response->json()['modelos'])->pluck('nome', 'codigo')->toArray();
@@ -53,7 +53,7 @@ class FipeApiServices implements FipeApiInterface
     public function listarAnos(string $marca, string $modelo): array
     {
         try {
-            $response = Http::timeout(8)->get("https://parallelum.com.br/fipe/api/v1/carros/marcas/{$marca}/modelos/{$modelo}/anos");
+            $response = Http::timeout(3)->get("https://parallelum.com.br/fipe/api/v1/carros/marcas/{$marca}/modelos/{$modelo}/anos");
 
             if ($response->successful()) {
                 return collect($response->json())->pluck('nome', 'codigo')->toArray();
@@ -70,7 +70,7 @@ class FipeApiServices implements FipeApiInterface
     public function consultarPreco(string $marca, string $modelo, string $ano): array
     {
         try {
-            $response = Http::timeout(8)->get("{$this->baseUrl}/carros/marcas/{$marca}/modelos/{$modelo}/anos/{$ano}");
+            $response = Http::timeout(3)->get("{$this->baseUrl}/carros/marcas/{$marca}/modelos/{$modelo}/anos/{$ano}");
 
             if ($response->successful()) {
                 return $response->json();
