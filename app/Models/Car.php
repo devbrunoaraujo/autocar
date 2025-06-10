@@ -17,15 +17,26 @@ class Car extends Model
         'modelo_nome',
         'ano_nome',
         'images',
-        'thumb'
+        'thumb',
+        'is_active',
+        'is_featured',  
     ];
 
      protected $casts = [
         'images' => 'array',
+        'is_active' => 'boolean',
+        'is_featured' => 'boolean',
     ];
 
     protected static function booted()
     {
+
+        static::saving(function ($car) {
+            if (! $car->is_active) {
+                $car->is_featured = false;
+            }
+        });
+
         static::deleting(function ($car) {
             if ($car->thumb) {
                 Storage::disk('public')->delete($car->thumb);

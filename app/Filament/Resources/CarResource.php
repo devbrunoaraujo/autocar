@@ -20,6 +20,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -203,6 +204,23 @@ class CarResource extends Resource
                     ->disk('public')
                     ->visibility('visible')
                     ->size(50),
+
+                ToggleColumn::make('is_active')
+                    ->label('Ativo')
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->afterStateUpdated(function ($record, $state) {
+                        // Se desativar, remover destaque
+                        if (!$state) {
+                            $record->update(['is_featured' => false]);
+                        }
+                    }),
+
+                ToggleColumn::make('is_featured')
+                    ->label('Destaque')
+                    ->onIcon('heroicon-o-star')
+                    ->offIcon('heroicon-o-star')
+                    ->disabled(fn ($record) => ! $record->is_active),
 
                 Tables\Columns\TextColumn::make('marca_nome')
                     ->label('Marca')

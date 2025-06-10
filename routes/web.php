@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// web.php
+Route::get('/', fn () => view('home'))->name('home');
+Route::get('/stock', fn () => view('stock'))->name('estoque');
+
