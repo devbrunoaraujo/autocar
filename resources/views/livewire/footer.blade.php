@@ -1,5 +1,5 @@
 <div>
-    <footer class="bg-blue-600 text-white py-8" id="contato">
+    <footer class="bg-emerald-600 text-white py-8" id="contato">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <h3 class="font-bold text-lg mb-2">Revenda</h3>

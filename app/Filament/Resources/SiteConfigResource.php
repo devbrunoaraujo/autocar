@@ -22,7 +22,7 @@ class SiteConfigResource extends Resource
 {
     protected static ?string $model = SiteConfig::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'untitledui-tool';
 
     protected static ?string $modelLabel = 'Configurações';
 
@@ -68,18 +68,18 @@ class SiteConfigResource extends Resource
                     FileUpload::make('logo')
                         ->label('Logo')
                         ->image()
-                        ->disk('public')
-                        ->directory('logos')
-                        ->getUploadedFileNameForStorageUsing(function ($file) {
-                            return 'logo.png';
-                        })
-                        ->visibility('public')
+                        ->imageEditor()
                         ->imagePreviewHeight('150')
+                         ->preserveFilenames(false)
+                        ->directory('logos')
+                        ->disk('public')
+                        ->visibility('public')
+                        ->getUploadedFileNameForStorageUsing(fn ($file) => 'logo.png') // Define nome fixo
+                        ->downloadable()
                         ->dehydrated()
                         ->deleteUploadedFileUsing(function ($file) {
                             Storage::disk('public')->delete($file);
                     }),
-
                 ])->columns(1)
 
             ]);
