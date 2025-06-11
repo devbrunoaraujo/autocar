@@ -9,7 +9,7 @@
 <body class="bg-white text-gray-900">
 
     {{-- Navbar --}}
-    @include('livewire.navbar')
+    @livewire('navbar')
 
     {{-- Conteúdo principal --}}
     <main>
@@ -17,7 +17,7 @@
     </main>
 
     {{-- Rodapé --}}
-    @include('livewire.footer')
+    @livewire('footer')
 
     @livewireScripts
     @stack('scripts')

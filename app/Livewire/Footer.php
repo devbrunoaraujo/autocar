@@ -11,7 +11,7 @@ class Footer extends Component
 
     public function mount()
     {
-        dd($this->config = SiteConfig::all()->first());
+        $this->config = SiteConfig::all()->first();
     }
 
     public function render()

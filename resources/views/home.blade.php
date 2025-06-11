@@ -3,7 +3,7 @@
 @section('content')
 
     {{-- Banner --}}
-    @include('livewire.banner')
+    @livewire('banner')
 
     {{-- Destaques --}}
     <section class="py-12 bg-gray-100">
@@ -17,9 +17,9 @@
     </section>
 
     {{-- Sobre --}}
-    @include('livewire.about')
+    @livewire('about')
 
     {{-- Depoimentos --}}
-    @include('livewire.testimonials')
+    @livewire('testimonials')
 
 @endsection
