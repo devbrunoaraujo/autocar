@@ -1,19 +1,36 @@
-<div x-data="{
-    activeSlide: 0,
-    slides: {{ json_encode($siteConfig->banners) }},
-    next() {
-        this.activeSlide = (this.activeSlide + 1) % this.slides.length
-    },
-    prev() {
-        this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length
-    }
-}" class="relative overflow-hidden w-full h-64 md:h-96 rounded-lg shadow-lg">
+<div
+    x-data="{
+        activeSlide: 0,
+        slides: {{ json_encode($siteConfig->banners) }},
+        next() {
+            this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+        },
+        prev() {
+            this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+        },
+        autoplayInterval: null,
+        startAutoplay() {
+            this.autoplayInterval = setInterval(() => this.next(), 5000);
+        },
+        stopAutoplay() {
+            clearInterval(this.autoplayInterval);
+        }
+    }"
+    x-init="startAutoplay()"
+    @mouseenter="stopAutoplay()"
+    @mouseleave="startAutoplay()"
+    class="relative overflow-hidden w-full h-64 md:h-96 rounded-lg shadow-lg"
+>
 
     <!-- Slides -->
     <template x-for="(slide, index) in slides" :key="index">
-        <div x-show="activeSlide === index" x-transition:enter="transition ease-out duration-500"
+        <div
+            x-show="activeSlide === index"
+            x-transition:enter="transition ease-out duration-500"
             x-transition:enter-start="opacity-0 transform scale-95"
-            x-transition:enter-end="opacity-100 transform scale-100" class="absolute inset-0 w-full h-full">
+            x-transition:enter-end="opacity-100 transform scale-100"
+            class="absolute inset-0 w-full h-full"
+        >
             <img :src="'/storage/' + slide" alt="Banner" class="w-full h-full object-cover" />
         </div>
     </template>
