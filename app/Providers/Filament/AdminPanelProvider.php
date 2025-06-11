@@ -28,9 +28,9 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->favicon(asset('images/logo.png'))
-            ->brandLogo(asset('images/logo.png'))
-            ->darkModeBrandLogo(asset('images/dark_logo.png'))
+            ->favicon(asset('storage/logos/favicon.png'))
+            ->brandLogo(asset('storage/logos/logo.png'))
+            ->darkModeBrandLogo(asset('storage/logos/logo.png'))
             ->brandLogoHeight('7rem')
             ->registration()
             ->colors([

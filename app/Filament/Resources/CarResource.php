@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Contracts\FipeApiInterface;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -59,7 +60,7 @@ class CarResource extends Resource
 
 
                         //Select modelo
-                        Forms\Components\Select::make('modelo')
+                        Select::make('modelo')
                             ->label('Modelo')
                             ->options(function (callable $get) {
                                 $marca = $get('marca');
@@ -82,7 +83,7 @@ class CarResource extends Resource
 
 
                         //select ano
-                        Forms\Components\Select::make('ano')
+                        Select::make('ano')
                             ->label('Ano')
                             ->options(function (callable $get) {
                                 $marca = $get('marca');
@@ -110,7 +111,7 @@ class CarResource extends Resource
 
 
                         //preço fipe
-                        Forms\Components\Placeholder::make('preco_fipe')
+                        Placeholder::make('preco_fipe')
                             ->label('Preço FIPE')
                             ->content(function (callable $get) {
                                 $marca = $get('marca');
@@ -121,7 +122,7 @@ class CarResource extends Resource
                                 return $result['Valor'] ?? 'Preço não encontrado';
                             }),
 
-                        Forms\Components\TextInput::make('preco')
+                        TextInput::make('preco')
                             ->label('Preço Final')
                             ->numeric()
                             ->prefix('R$')
@@ -134,7 +135,7 @@ class CarResource extends Resource
 
                     ->schema([
                         //Galeria do veículo
-                        Forms\Components\FileUpload::make('thumb')
+                        FileUpload::make('thumb')
                             ->label('Thumb')
                             ->image()
                             ->disk('public')

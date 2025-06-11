@@ -34,8 +34,11 @@ class SiteConfigResource extends Resource
 
                 Fieldset::make('Configurações do Site')
                 ->schema([
-                    TextInput::make('telefone')->label('Telefone')->required(),
-                    TextInput::make('email')->label('E-mail')->email()->required(),
+                    TextInput::make('telefone')->label('Telefone')->required()->prefixIcon('fas-phone'),
+                    TextInput::make('email')->label('E-mail')->email()->required()->prefixIcon('fas-envelope-open-text'),
+                    TextInput::make('whatsapp')->label('Whatsapp')->url()->prefixIcon('fab-whatsapp'),
+                    TextInput::make('facebook')->label('Facebook')->url()->prefixIcon('fab-facebook'),
+                    TextInput::make('instagram')->label('Instagram')->url()->prefixIcon('fab-instagram'),
                     Textarea::make('endereco')->label('Endereço')->rows(2),
                     FileUpload::make('banners')
                         ->label('Banners do Slideshow')
@@ -60,7 +63,22 @@ class SiteConfigResource extends Resource
                         ->dehydrated()
                         ->deleteUploadedFileUsing(function ($file) {
                             Storage::disk('public')->delete($file);
+                        }),
+
+                    FileUpload::make('logo')
+                        ->label('Logo')
+                        ->image()
+                        ->disk('public')
+                        ->directory('logos')
+                        ->getUploadedFileNameForStorageUsing(function ($file) {
+                            return 'logo.png';
                         })
+                        ->visibility('public')
+                        ->imagePreviewHeight('150')
+                        ->dehydrated()
+                        ->deleteUploadedFileUsing(function ($file) {
+                            Storage::disk('public')->delete($file);
+                    }),
 
                 ])->columns(1)
 
