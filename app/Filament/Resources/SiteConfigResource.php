@@ -6,6 +6,7 @@ use App\Filament\Resources\SiteConfigResource\Pages;
 use App\Filament\Resources\SiteConfigResource\RelationManagers;
 use App\Models\SiteConfig;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -23,37 +24,46 @@ class SiteConfigResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $modelLabel = 'Configurações';
+
+
     public static function form(Form $form): Form
     {
          return $form
             ->schema([
-                TextInput::make('telefone')->label('Telefone')->required(),
-                TextInput::make('email')->label('E-mail')->email()->required(),
-                Textarea::make('endereco')->label('Endereço')->rows(2),
-                FileUpload::make('banners')
-                    ->label('Banners do Slideshow')
-                    ->multiple()
-                    ->image()
-                    ->imageEditor()
-                    ->imagePreviewHeight('150')
-                    ->maxSize(2048)
-                    ->imageEditorAspectRatios([
-                        null,
-                        '16:9',
-                        '4:3',
-                        '1:1',
-                    ])
-                    ->directory('banners')
-                    ->reorderable()
-                    ->downloadable()
-                    ->maxFiles(5)
-                    ->disk('public')
-                    ->visibility('public')
-                    ->preserveFilenames()
-                    ->dehydrated()
-                    ->deleteUploadedFileUsing(function ($file) {
-                        Storage::disk('public')->delete($file);
-                    })
+
+                Fieldset::make('Configurações do Site')
+                ->schema([
+                    TextInput::make('telefone')->label('Telefone')->required(),
+                    TextInput::make('email')->label('E-mail')->email()->required(),
+                    Textarea::make('endereco')->label('Endereço')->rows(2),
+                    FileUpload::make('banners')
+                        ->label('Banners do Slideshow')
+                        ->multiple()
+                        ->image()
+                        ->imageEditor()
+                        ->imagePreviewHeight('150')
+                        ->maxSize(2048)
+                        ->imageEditorAspectRatios([
+                            null,
+                            '16:9',
+                            '4:3',
+                            '1:1',
+                        ])
+                        ->directory('banners')
+                        ->reorderable()
+                        ->downloadable()
+                        ->maxFiles(5)
+                        ->disk('public')
+                        ->visibility('public')
+                        ->preserveFilenames()
+                        ->dehydrated()
+                        ->deleteUploadedFileUsing(function ($file) {
+                            Storage::disk('public')->delete($file);
+                        })
+
+                ])->columns(1)
+
             ]);
     }
 

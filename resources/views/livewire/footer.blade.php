@@ -7,13 +7,12 @@
             </div>
             <div>
                 <h3 class="font-bold text-lg mb-2">Contato</h3>
-                <p>📞 (11) 99999-0000</p>
-                <p>📧 contato@revenda.com</p>
+                <p>📞 {{$siteConfig->telefone}}</p>
+                <p>📧 {{ $siteConfig->email }}</p>
             </div>
             <div>
                 <h3 class="font-bold text-lg mb-2">Endereço</h3>
-                <p>Rua Exemplo, 123</p>
-                <p>São Paulo - SP</p>
+                <p>{{$siteConfig->endereco}}</p>
             </div>
         </div>
         <div class="text-center mt-6 text-sm text-white/70">
