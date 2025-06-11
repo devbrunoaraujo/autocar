@@ -6,6 +6,6 @@
                 <h3 class="mt-2 text-lg font-bold">{{ $car->marca_nome }} {{ $car->modelo_nome }}</h3>
                 <p class="text-gray-600">{{ $car->ano_nome }} • {{ number_format($car->preco, 2, ',', '.') }}</p>
             </div>
-        @endforeach
+        @endforeachxit
     </div>
 </div>
