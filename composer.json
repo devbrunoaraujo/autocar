@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "blade-ui-kit/blade-icons": "^1.8",
+        "codeat3/blade-iconpark": "^1.7",
         "davidhsianturi/blade-bootstrap-icons": "^2.0",
         "filament/filament": "^3.3",
         "laravel/framework": "^12.0",

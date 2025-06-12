@@ -8,15 +8,15 @@
 </head>
 <body class="bg-white text-gray-900">
 
-    {{-- Navbar --}}
+    {{-- Navbar (Livewire) --}}
     @livewire('navbar')
 
     {{-- Conteúdo principal --}}
     <main>
-        @yield('content')
+        {{ $slot }}
     </main>
 
-    {{-- Rodapé --}}
+    {{-- Rodapé (Livewire) --}}
     @livewire('footer')
 
     @livewireScripts

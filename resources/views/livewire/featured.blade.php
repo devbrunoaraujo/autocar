@@ -2,7 +2,7 @@
     <!-- carros-destaque.blade.php -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         @foreach ($cars as $car)
-            <a href="#"
+            <a href="{{ route('veiculo', ['id' => $car->id]) }}"
                class="block bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 overflow-hidden group">
 
                 <div class="relative">

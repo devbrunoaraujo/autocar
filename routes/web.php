@@ -1,8 +1,12 @@
 <?php
 
+use App\Livewire\VehicleShow;
 use Illuminate\Support\Facades\Route;
 
 // web.php
-Route::get('/', fn () => view('home'))->name('home');
+use App\Livewire\Home;
+
+Route::get('/', Home::class)->name('home');
 Route::get('/stock', fn () => view('stock'))->name('estoque');
+Route::get('/vehicle/{id}', VehicleShow::class)->name('veiculo');
 

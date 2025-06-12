@@ -7,17 +7,22 @@
             </div>
             <div>
                 <h3 class="font-bold text-lg mb-2">Contato</h3>
-                <p>📞 {{$siteConfig->telefone}}</p>
-                <p>📧 {{ $siteConfig->email }}</p>
+                <p class="flex items-center gap-2">
+                    <x-fas-phone class="w-4 h-4 text-white-600" /> {{$siteConfig->telefone}}
+                </p>
+                <p class="flex items-center gap-2">
+                    <x-fas-envelope-open-text class="w-4 h-4 text-white-600" /> {{ $siteConfig->email }}
+                </p>
             </div>
             <div>
                 <h3 class="font-bold text-lg mb-2">Endereço</h3>
-                <p>{{$siteConfig->endereco}}</p>
+                <p class="flex items-center gap-2">
+                    <x-iconpark-local class="w-4 h-4 text-white-600"/>{{$siteConfig->endereco}}
+                </p>
             </div>
         </div>
         <div class="text-center mt-6 text-sm text-white/70">
             © {{ now()->year }} Revenda de Veículos. Todos os direitos reservados.
         </div>
     </footer>
-
 </div>
