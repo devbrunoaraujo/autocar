@@ -1,9 +1,10 @@
-<div>
-    <nav class="bg-white shadow-md">
+<div x-data="{ open: false }" class="relative">
+    <nav class="bg-white shadow-md w-full">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+
             {{-- Logo --}}
-            <a href="{{ route('home') }}" class="text-2xl font-extrabold text-emerald-600 tracking-wide">
-                <img src="{{ asset('storage/logos/logo.png') }}" alt="Logo" class="h-15 object-contain">
+            <a href="{{ route('home') }}" class="text-2xl font-extrabold text-emerald-600 tracking-wide flex items-center">
+                <img src="{{ asset('storage/logos/logo.png') }}" alt="Logo" class="h-10 w-auto object-contain">
             </a>
 
             {{-- Menu desktop --}}
@@ -15,29 +16,34 @@
                 <li><a href="#contato" class="hover:text-emerald-600 transition">Contato</a></li>
             </ul>
 
-            {{-- Mobile menu toggle --}}
-            <div x-data="{ open: false }" class="md:hidden relative">
-                <button @click="open = !open" aria-label="Abrir menu" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-700" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
+            {{-- Botão do menu mobile --}}
+            <button @click="open = !open" aria-label="Abrir menu"
+                    class="md:hidden focus:outline-none transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-gray-700" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
 
-                {{-- Menu mobile --}}
-                <div x-show="open"
-                     x-transition
-                     class="absolute top-14 left-0 w-[90vw] bg-white border rounded-lg shadow-md p-4 z-50 space-y-3">
-                    <ul class="flex flex-col gap-2 text-gray-700 font-medium">
-                        <li><a href="{{ route('home') }}" class="hover:text-emerald-600">Início</a></li>
-                        <li><a href="{{ route('estoque') }}" class="hover:text-emerald-600">Estoque</a></li>
-                        <li><a href="#sobre" class="hover:text-emerald-600">Sobre</a></li>
-                        <li><a href="#depoimentos" class="hover:text-emerald-600">Depoimentos</a></li>
-                        <li><a href="#contato" class="hover:text-emerald-600">Contato</a></li>
-                    </ul>
-                </div>
-            </div>
+        {{-- Menu mobile --}}
+        <div x-show="open"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             class="md:hidden absolute top-full inset-x-0 bg-white z-50 border-t border-gray-100 shadow-md rounded-b-lg px-6 py-4 space-y-4">
+
+            <ul class="flex flex-col gap-4 text-gray-800 font-medium text-base">
+                <li><a href="{{ route('home') }}" class="hover:text-emerald-600 transition">Início</a></li>
+                <li><a href="{{ route('estoque') }}" class="hover:text-emerald-600 transition">Estoque</a></li>
+                <li><a href="#sobre" class="hover:text-emerald-600 transition">Sobre</a></li>
+                <li><a href="#depoimentos" class="hover:text-emerald-600 transition">Depoimentos</a></li>
+                <li><a href="#contato" class="hover:text-emerald-600 transition">Contato</a></li>
+            </ul>
         </div>
     </nav>
 </div>
