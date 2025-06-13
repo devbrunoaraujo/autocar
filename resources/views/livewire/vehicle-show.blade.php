@@ -19,6 +19,33 @@
 
             <!-- Imagem ativa -->
             <div class="w-full aspect-[4/3] rounded-lg overflow-hidden relative">
+                <!-- Botão esquerdo -->
+                <button
+                    @click="active = active > 0 ? active - 1 : images.length - 1"
+                    class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-700 rounded-full p-2 shadow transition"
+                    x-show="images.length > 1"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+
+                <!-- Botão direito -->
+                <button
+                    @click="active = active < images.length - 1 ? active + 1 : 0"
+                    class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-700 rounded-full p-2 shadow transition"
+                    x-show="images.length > 1"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+
+                <!-- Galeria de imagens -->
                 <template x-for="(img, index) in images" :key="index">
                     <img
                         x-show="active === index"
@@ -34,6 +61,7 @@
                     />
                 </template>
             </div>
+
 
             <!-- Miniaturas -->
             <div class="flex space-x-2 overflow-x-auto pt-2 pb-1">

@@ -19,7 +19,7 @@
     x-init="startAutoplay()"
     @mouseenter="stopAutoplay()"
     @mouseleave="startAutoplay()"
-    class="relative overflow-hidden w-full h-64 md:h-96 rounded-lg shadow-lg"
+    class="relative overflow-hidden w-full h-64 md:h-96  shadow-lg"
 >
 
     <!-- Slides -->
