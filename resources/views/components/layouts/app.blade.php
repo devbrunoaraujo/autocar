@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="bg-white text-gray-900 overflow-x-hidden">
+<body class="bg-gray-800 text-emerald-600 overflow-x-hidden">
 
     {{-- Navbar (Livewire) --}}
     @livewire('navbar')

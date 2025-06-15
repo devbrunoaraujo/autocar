@@ -19,7 +19,10 @@ class Car extends Model
         'images',
         'thumb',
         'is_active',
-        'is_featured',  
+        'is_featured',
+        'quilometragem',
+        'combustivel',
+        'comentario'
     ];
 
      protected $casts = [

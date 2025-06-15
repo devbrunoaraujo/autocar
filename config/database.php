@@ -112,6 +112,17 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'fipe' => [ // nova conexão para o banco da tabela FIPE
+            'driver' => 'mysql',
+            'host' => env('FIPE_DB_HOST', '127.0.0.1'),
+            'port' => env('FIPE_DB_PORT', '3306'),
+            'database' => env('FIPE_DB_DATABASE', 'fipe'),
+            'username' => env('FIPE_DB_USERNAME', 'root'),
+            'password' => env('FIPE_DB_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+        ],
+
     ],
 
     /*

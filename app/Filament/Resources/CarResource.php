@@ -6,6 +6,7 @@ use App\Filament\Resources\CarResource\Pages;
 use App\Filament\Resources\CarResource\RelationManagers;
 use App\Models\Car;
 use App\Contracts\FipeApiInterface;
+use App\Services\ImageUploadService;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
@@ -21,6 +22,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,7 +44,7 @@ class CarResource extends Resource
                     ->schema([
 
                         //select marca
-                        Forms\Components\Select::make('marca')
+                        Select::make('marca')
                             ->label('Marca')
                             ->options(fn() => app(FipeApiInterface::class)->listarMarcas())
                             ->searchable()
@@ -128,6 +130,12 @@ class CarResource extends Resource
                             ->prefix('R$')
                             ->required(),
 
+                        TextInput::make('quilometragem')
+                            ->label('Quilometragem')
+                            ->numeric()
+                            ->prefix('Km')
+                            ->required(),
+
                     ])
                     ->columns(1),
 
@@ -144,6 +152,15 @@ class CarResource extends Resource
                             ->visibility('public')
                             ->imagePreviewHeight('150')
                             ->dehydrated()
+                            ->saveUploadedFileUsing(function ($file) {
+                                return ImageUploadService::saveWithWebp(
+                                    file: $file,
+                                    dir: 'carros/thumbs',
+                                    width: 640,
+                                    quality: 80,
+                                    disk: 'public'
+                                );
+                            })
                             ->deleteUploadedFileUsing(function ($file) {
                                 Storage::disk('public')->delete($file);
                             }),
@@ -169,6 +186,15 @@ class CarResource extends Resource
                             ->disk('public')
                             ->visibility('public')
                             ->dehydrated()
+                            ->saveUploadedFileUsing(function ($file) {
+                                return ImageUploadService::saveWithWebp(
+                                    file: $file,
+                                    dir: 'carros/galeria',
+                                    width: 1280,
+                                    quality: 75,
+                                    disk: 'public'
+                                );
+                            })
                             ->deleteUploadedFileUsing(function ($file) {
                                 Storage::disk('public')->delete($file);
                             }),
@@ -189,9 +215,14 @@ class CarResource extends Resource
                             ->bulkToggleable()
                             ->helperText('Selecione os opcionais disponíveis para este carro.'),
 
-                    ])->columns(1)
+                    ])->columns(1),
 
+                RichEditor::make('comentario')
+                        ->label('Comentário sobre o veículo')
+                        ->helperText('Máximo de 500 caracteres (sem contar HTML)')
+                        ->columnSpanFull()
             ]);
+
     }
 
 
@@ -199,12 +230,12 @@ class CarResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('thumb')
+                /*Tables\Columns\ImageColumn::make('thumb')
                     ->label('Thumb')
                     ->circular()
                     ->disk('public')
                     ->visibility('visible')
-                    ->size(50),
+                    ->size(50),*/
 
                 ToggleColumn::make('is_active')
                     ->label('Ativo')

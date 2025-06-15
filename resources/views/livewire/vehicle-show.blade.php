@@ -1,8 +1,8 @@
 <div class="max-w-7xl mx-auto px-4 py-10 space-y-10">
 
     <!-- Título -->
-    <div class="bg-white p-6 rounded-xl shadow-md">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">
+    <div class="bg-gray-700 p-6 rounded-xl shadow-md">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-100">
             {{ $car->marca_nome }} {{ $car->modelo_nome }} {{ $car->ano_nome }}
         </h1>
     </div>
@@ -15,7 +15,7 @@
             active: 0,
             images: @js($car->images ?? []),
             setActive(index) { this.active = index }
-        }" class="bg-white p-4 rounded-xl shadow-md space-y-4">
+        }" class="bg-gray-700 p-4 rounded-xl shadow-md space-y-4">
 
             <!-- Imagem ativa -->
             <div class="w-full aspect-[4/3] rounded-lg overflow-hidden relative">
@@ -75,14 +75,14 @@
         </div>
 
         <!-- Bloco CTA e infos principais -->
-        <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between space-y-6">
+        <div class="bg-gray-700 p-6 rounded-xl shadow-md flex flex-col justify-between space-y-6">
 
             <div class="space-y-3">
-                <div class="text-2xl font-bold text-gray-800">
+                <div class="text-2xl font-bold text-gray-100">
                     R$ {{ number_format($car->preco, 2, ',', '.') }}
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                <div class="grid grid-cols-2 gap-4 text-sm text-gray-100">
                     <div><span class="font-medium">Marca:</span> {{ $car->marca_nome }}</div>
                     <div><span class="font-medium">Modelo:</span> {{ $car->modelo_nome }}</div>
                     <div><span class="font-medium">Ano:</span> {{ $car->ano_nome }}</div>
@@ -93,18 +93,18 @@
 
             <div class="space-y-4">
                 <a href="https://wa.me/{{ preg_replace('/\D/', '', $car->contato ?? '5599999999999') }}?text=Olá, tenho interesse no veículo {{ $car->marca_nome }} {{ $car->modelo_nome }}"
-                   class="block w-full text-center px-6 py-3 bg-emerald-600 text-white text-lg font-semibold rounded hover:bg-emerald-700 transition">
+                   class="block w-full text-center px-6 py-3 bg-emerald-700 text-gray-100 text-lg font-semibold rounded hover:bg-emerald-700 transition">
                     Falar via WhatsApp
                 </a>
 
                 <div class="border-t pt-4">
-                    <p class="text-sm text-gray-600">
+                    <p class="text-sm text-gray-100">
                         Simulação em até 60x de:
-                        <span class="text-blue-600 font-semibold">
+                        <span class="text-gray-100 font-semibold">
                             R$ {{ number_format($car->preco / 60, 2, ',', '.') }}
                         </span>
                     </p>
-                    <button class="mt-3 w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                    <button class="mt-3 w-full py-2 bg-rose-700 text-white rounded hover:bg-rose-800 transition">
                         Simular Financiamento
                     </button>
                 </div>
@@ -116,17 +116,14 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <!-- Descrição -->
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">Descrição</h2>
-            <p class="text-gray-600 leading-relaxed">
-                {{ $car->descricao ?? 'Sem descrição disponível.' }}
-            </p>
+        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
+            @livewire('list-options')
         </div>
 
         <!-- Detalhes técnicos -->
-        <div class="bg-white p-6 rounded-xl shadow-md">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Detalhes Técnicos</h2>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700 text-sm">
+        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
+            <h2 class="text-xl font-semibold text-gray-100 mb-4">Detalhes Técnicos</h2>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-100 text-sm">
                 <li><strong>Marca:</strong> {{ $car->marca_nome }}</li>
                 <li><strong>Modelo:</strong> {{ $car->modelo_nome }}</li>
                 <li><strong>Ano:</strong> {{ $car->ano_nome }}</li>

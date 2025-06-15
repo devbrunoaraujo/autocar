@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         @foreach ($cars as $car)
             <a href="{{ route('veiculo', ['id' => $car->id]) }}"
-               class="block bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 overflow-hidden group">
+               class="block bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 overflow-hidden group">
 
                 <div class="relative">
                     <img src="{{ asset('storage/' . $car->thumb) }}"
@@ -15,10 +15,10 @@
                 </div>
 
                 <div class="p-4">
-                    <h3 class="text-lg font-semibold text-gray-800 truncate">
+                    <h3 class="text-lg font-semibold text-gray-100 truncate">
                         {{ $car->marca_nome }} {{ $car->modelo_nome }}
                     </h3>
-                    <p class="text-gray-500 text-sm mb-2">
+                    <p class="text-gray-100 text-sm mb-2">
                         {{ $car->ano_nome }} • R$ {{ number_format($car->preco, 2, ',', '.') }}
                     </p>
 
