@@ -1,35 +1,70 @@
-<div>
-    <!-- carros-destaque.blade.php -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        @foreach ($cars as $car)
-            <a href="{{ route('veiculo', ['id' => $car->id]) }}"
-               class="block bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 overflow-hidden group">
-
+<!-- HIGHLIGHTS SECTION -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-steel-blue mb-4">Veículos em Destaque</h2>
+            <p class="text-gray-600 text-lg">Seleções especiais com as melhores condições</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Featured Vehicle Card 1 -->
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer" onclick="showVehicleDetails('bmw-x5')">
                 <div class="relative">
-                    <img src="{{ asset('storage/' . $car->thumb) }}"
-                         class="w-full h-50 object-cover group-hover:opacity-90 transition-opacity duration-300"
-                         alt="{{ $car->modelo_nome }}">
-                    <div class="absolute top-2 right-2 bg-yellow-600 text-white text-xs font-semibold px-2 py-1 rounded">
-                        <x-bi-star-fill />
+                    <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center">
+                        <i class="fas fa-car text-white text-6xl"></i>
+                    </div>
+                    <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
+                        DESTAQUE
                     </div>
                 </div>
-
-                <div class="p-4">
-                    <h3 class="text-lg font-semibold text-gray-100 truncate">
-                        {{ $car->marca_nome }} {{ $car->modelo_nome }}
-                    </h3>
-                    <p class="text-gray-100 text-sm mb-2">
-                        {{ $car->ano_nome }} • R$ {{ number_format($car->preco, 2, ',', '.') }}
-                    </p>
-
-                    <div class="flex justify-between items-center mt-4">
-                        <span class="text-emerald-600 font-semibold">Ver mais</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-steel-blue mb-2">BMW X5 2023</h3>
+                    <p class="text-gray-600 mb-4">SUV Premium com performance excepcional</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-electric-blue">R$ 450.000</span>
+                        <span class="text-sm text-gray-500">0 km</span>
                     </div>
                 </div>
-            </a>
-        @endforeach
+            </div>
+
+            <!-- Featured Vehicle Card 2 -->
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer" onclick="showVehicleDetails('mercedes-c180')">
+                <div class="relative">
+                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-500 flex items-center justify-center">
+                        <i class="fas fa-car text-white text-6xl"></i>
+                    </div>
+                    <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
+                        DESTAQUE
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-steel-blue mb-2">Mercedes-Benz C180</h3>
+                    <p class="text-gray-600 mb-4">Elegância e sofisticação alemã</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-electric-blue">R$ 280.000</span>
+                        <span class="text-sm text-gray-500">0 km</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Vehicle Card 3 -->
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer" onclick="showVehicleDetails('audi-a4')">
+                <div class="relative">
+                    <div class="h-48 bg-gradient-to-br from-gray-600 to-gray-400 flex items-center justify-center">
+                        <i class="fas fa-car text-white text-6xl"></i>
+                    </div>
+                    <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
+                        DESTAQUE
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-steel-blue mb-2">Audi A4 2023</h3>
+                    <p class="text-gray-600 mb-4">Tecnologia e performance em perfeita harmonia</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-bold text-electric-blue">R$ 320.000</span>
+                        <span class="text-sm text-gray-500">0 km</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</section>

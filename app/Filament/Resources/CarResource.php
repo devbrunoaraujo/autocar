@@ -39,7 +39,6 @@ class CarResource extends Resource
     {
         return $form
             ->schema([
-
                 Fieldset::make('Informações do Veículo')
                     ->schema([
 
@@ -59,7 +58,6 @@ class CarResource extends Resource
                                     $set('marca_nome', $marcaNome);
                                 }
                             }),
-
 
                         //Select modelo
                         Select::make('modelo')

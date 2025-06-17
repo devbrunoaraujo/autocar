@@ -6,8 +6,11 @@
     <title>{{ $title ?? 'Revenda de Veículos' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 </head>
-<body class="bg-gray-800 text-emerald-600 overflow-x-hidden">
+<body class="bg-gray-50">
+    
 
     {{-- Navbar (Livewire) --}}
     @livewire('navbar')
@@ -22,5 +25,6 @@
 
     @livewireScripts
     @stack('scripts')
+    
 </body>
 </html>

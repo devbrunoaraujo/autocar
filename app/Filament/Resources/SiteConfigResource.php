@@ -46,7 +46,7 @@ class SiteConfigResource extends Resource
                         ->image()
                         ->imageEditor()
                         ->imagePreviewHeight('150')
-                        ->maxSize(2048)
+                        ->maxSize(5000)
                         ->imageEditorAspectRatios([
                             null,
                             '16:9',

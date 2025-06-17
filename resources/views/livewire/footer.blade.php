@@ -1,28 +1,65 @@
-<div>
-    <footer class="bg-emerald-800 text-white py-8" id="contato">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- FOOTER -->
+<footer class="bg-steel-blue text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Company Info -->
             <div>
-                <h3 class="font-bold text-lg mb-2">Revenda</h3>
-                <p>Veículos selecionados com garantia e procedência.</p>
+                <h3 class="text-xl font-bold mb-4">AutoMax</h3>
+                <p class="text-gray-300 mb-4">Sua experiência automotiva de excelência há mais de 15 anos no mercado.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-electric-blue">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-electric-blue">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-electric-blue">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-electric-blue">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
             </div>
+            
+            <!-- Quick Links -->
             <div>
-                <h3 class="font-bold text-lg mb-2">Contato</h3>
-                <p class="flex items-center gap-2">
-                    <x-fas-phone class="w-4 h-4 text-white-600" /> {{$siteConfig->telefone}}
-                </p>
-                <p class="flex items-center gap-2">
-                    <x-fas-envelope-open-text class="w-4 h-4 text-white-600" /> {{ $siteConfig->email }}
-                </p>
+                <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="text-gray-300 hover:text-electric-blue">Início</a></li>
+                    <li><a href="#financing" class="text-gray-300 hover:text-electric-blue">Financiamento</a></li>
+                    <li><a href="#about" class="text-gray-300 hover:text-electric-blue">Sobre Nós</a></li>
+                    <li><a href="#contact" class="text-gray-300 hover:text-electric-blue">Contato</a></li>
+                    <li><a href="#" onclick="showInventoryPage()" class="text-gray-300 hover:text-electric-blue">Estoque</a></li>
+                </ul>
             </div>
+            
+            <!-- Services -->
             <div>
-                <h3 class="font-bold text-lg mb-2">Endereço</h3>
-                <p class="flex items-center gap-2">
-                    <x-iconpark-local class="w-4 h-4 text-white-600"/>{{$siteConfig->endereco}}
-                </p>
+                <h4 class="text-lg font-bold mb-4">Serviços</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-300 hover:text-electric-blue">Venda de Veículos</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-electric-blue">Financiamento</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-electric-blue">Seguro Auto</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-electric-blue">Avaliação</a></li>
+                    <li><a href="#" class="text-gray-300 hover:text-electric-blue">Consultoria</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Info -->
+            <div>
+                <h4 class="text-lg font-bold mb-4">Contato</h4>
+                <div class="space-y-2 text-gray-300">
+                    <p><i class="fas fa-map-marker-alt mr-2"></i>Av. Principal, 1234 - Centro</p>
+                    <p><i class="fas fa-phone mr-2"></i>(11) 1234-5678</p>
+                    <p><i class="fas fa-envelope mr-2"></i>contato@automax.com.br</p>
+                    <p><i class="fas fa-clock mr-2"></i>Seg-Sex: 8h-18h | Sáb: 8h-12h</p>
+                </div>
             </div>
         </div>
-        <div class="text-center mt-6 text-sm text-white/70">
-            © {{ now()->year }} Revenda de Veículos. Todos os direitos reservados.
+        
+        <div class="border-t border-gray-600 mt-8 pt-8 text-center">
+            <p class="text-gray-300">&copy; 2025 AutoMax. Todos os direitos reservados.</p>
         </div>
-    </footer>
-</div>
+    </div>
+</footer>

@@ -1,9 +1,6 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+@config '../../tailwind.config.js';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../../node_modules/flowbite";
-
 
