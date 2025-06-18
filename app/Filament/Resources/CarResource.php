@@ -69,7 +69,7 @@ class CarResource extends Resource
                             })
                             ->searchable()
                             ->preload()
-                            ->reactive()
+                            ->live()
                             ->required()
                             ->afterStateUpdated(function (callable $get, callable $set) {
                                 $marca = $get('marca');
@@ -91,7 +91,7 @@ class CarResource extends Resource
                                 if (!$marca || !$modelo) return [];
                                 return app(FipeApiInterface::class)->listarAnos($marca, $modelo);
                             })
-                            ->reactive()
+                            ->live()
                             ->required()
                             ->afterStateUpdated(function (callable $get, callable $set) {
                                 $marca = $get('marca');
@@ -135,10 +135,30 @@ class CarResource extends Resource
                             ->required(),
 
                     ])
-                    ->columns(1),
+                    ->columns(1),            
 
-                Fieldset::make('Galeria do Veículo')
+               
+                Fieldset::make('Opcionais')
+                    ->schema([
 
+                        //options que carrega os opcionais
+                        Forms\Components\CheckboxList::make('options')
+                            ->label('Opcionais')
+                            ->relationship('options', 'name')
+                            ->columns(4)
+                            ->searchable()
+                            ->bulkToggleable()
+                            ->helperText('Selecione os opcionais disponíveis para este carro.'),
+
+                    ])->columns(1),
+
+                RichEditor::make('comentario')
+                        ->label('Comentário sobre o veículo')
+                        ->helperText('Máximo de 500 caracteres (sem contar HTML)')
+                        ->columnSpanFull(),
+
+                        
+                Section::make('Galeria do Veículo')
                     ->schema([
                         //Galeria do veículo
                         FileUpload::make('thumb')
@@ -149,7 +169,6 @@ class CarResource extends Resource
                             ->preserveFilenames()
                             ->visibility('public')
                             ->imagePreviewHeight('150')
-                            ->dehydrated()
                             ->saveUploadedFileUsing(function ($file) {
                                 return ImageUploadService::saveWithWebp(
                                     file: $file,
@@ -162,6 +181,7 @@ class CarResource extends Resource
                             ->deleteUploadedFileUsing(function ($file) {
                                 Storage::disk('public')->delete($file);
                             }),
+                        
 
                         //Thumb que aparece na tabela
                         Forms\Components\FileUpload::make('images')
@@ -183,7 +203,6 @@ class CarResource extends Resource
                             ->preserveFilenames()
                             ->disk('public')
                             ->visibility('public')
-                            ->dehydrated()
                             ->saveUploadedFileUsing(function ($file) {
                                 return ImageUploadService::saveWithWebp(
                                     file: $file,
@@ -195,30 +214,12 @@ class CarResource extends Resource
                             })
                             ->deleteUploadedFileUsing(function ($file) {
                                 Storage::disk('public')->delete($file);
-                            }),
+                            }),      
 
-
-                    ])->columns(1),
-
-
-                Fieldset::make('Opcionais')
-                    ->schema([
-
-                        //options que carrega os opcionais
-                        Forms\Components\CheckboxList::make('options')
-                            ->label('Opcionais')
-                            ->relationship('options', 'name')
-                            ->columns(4)
-                            ->searchable()
-                            ->bulkToggleable()
-                            ->helperText('Selecione os opcionais disponíveis para este carro.'),
-
-                    ])->columns(1),
-
-                RichEditor::make('comentario')
-                        ->label('Comentário sobre o veículo')
-                        ->helperText('Máximo de 500 caracteres (sem contar HTML)')
-                        ->columnSpanFull()
+                    ])
+                    ->columns(1)
+                    ->collapsible()
+                    ->collapsed(),
             ]);
 
     }

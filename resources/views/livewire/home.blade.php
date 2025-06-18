@@ -2,8 +2,13 @@
 
     @livewire('banner')
 
-    @livewire('featured')        
+    @livewire('featured')   
+    
+    @livewire('car-review')
 
     @livewire('team')
+
+    @livewire('financing')
      
+    @livewire('contact')
 </div>
