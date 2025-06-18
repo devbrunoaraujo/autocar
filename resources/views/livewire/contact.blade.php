@@ -31,7 +31,7 @@
                         </div>
                         <div>
                             <h3 class="font-bold text-steel-blue">Email</h3>
-                            <p class="text-gray-600">contato@automax.com.br</p>
+                            <p class="text-gray-600">contato@autocar.com.br</p>
                         </div>
                     </div>
                 </div>
