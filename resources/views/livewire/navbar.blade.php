@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex-shrink-0 flex items-center">
-                <h1 class="text-2xl font-bold text-white">AutoMax</h1>
+                <h1 class="text-2xl font-bold text-white">{{ env('APP_NAME') }}</h1>
                 <i class="fas fa-car ml-2 text-electric-blue text-xl"></i>
             </div>
             <div class="hidden md:block">

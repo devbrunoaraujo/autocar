@@ -9,7 +9,7 @@ class Featured extends Component
 {
     public function render()
     {
-        $cars = Car::where('is_featured', true)->take(6)->get();
+        $cars = Car::where(['is_active' => true, 'is_featured' => true ])->take(6)->get();
 
          return view('livewire.featured', compact('cars'));
     }

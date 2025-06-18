@@ -7,64 +7,27 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Featured Vehicle Card 1 -->
-            <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer" onclick="showVehicleDetails('bmw-x5')">
-                <div class="relative">
-                    <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center">
-                        <i class="fas fa-car text-white text-6xl"></i>
+            @foreach ($cars as $car)
+                 <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer">
+                    <div class="relative">
+                        <div class="h-48 bg-gradient-to-br from-gray-200 to-gray-100 flex items-center justify-center">
+                            <img src="{{ asset('storage/' . $car->thumb) }}" alt="{{ $car->modelo_nome }}" class="h-full max-h-48 w-auto object-contain">
+                        </div>
+                        <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
+                            DESTAQUE
+                        </div>
                     </div>
-                    <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
-                        DESTAQUE
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-steel-blue mb-2">BMW X5 2023</h3>
-                    <p class="text-gray-600 mb-4">SUV Premium com performance excepcional</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-bold text-electric-blue">R$ 450.000</span>
-                        <span class="text-sm text-gray-500">0 km</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Vehicle Card 2 -->
-            <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer" onclick="showVehicleDetails('mercedes-c180')">
-                <div class="relative">
-                    <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-500 flex items-center justify-center">
-                        <i class="fas fa-car text-white text-6xl"></i>
-                    </div>
-                    <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
-                        DESTAQUE
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-steel-blue mb-2">{{ $car->marca_nome }}</h3>
+                        <p class="text-gray-600 mb-4">{{ $car->modelo_nome }}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-emerald-600">R$ {{ $car->preco }}</span>
+                            <span class="text-sm text-gray-500">{{ $car->ano_nome }}</span>
+                            <span class="text-sm text-gray-500">{{ $car->quilometragem }}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-steel-blue mb-2">Mercedes-Benz C180</h3>
-                    <p class="text-gray-600 mb-4">Elegância e sofisticação alemã</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-bold text-electric-blue">R$ 280.000</span>
-                        <span class="text-sm text-gray-500">0 km</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Vehicle Card 3 -->
-            <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer" onclick="showVehicleDetails('audi-a4')">
-                <div class="relative">
-                    <div class="h-48 bg-gradient-to-br from-gray-600 to-gray-400 flex items-center justify-center">
-                        <i class="fas fa-car text-white text-6xl"></i>
-                    </div>
-                    <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
-                        DESTAQUE
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-steel-blue mb-2">Audi A4 2023</h3>
-                    <p class="text-gray-600 mb-4">Tecnologia e performance em perfeita harmonia</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-2xl font-bold text-electric-blue">R$ 320.000</span>
-                        <span class="text-sm text-gray-500">0 km</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
