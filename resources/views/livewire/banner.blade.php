@@ -11,7 +11,7 @@
                 Descubra veículos excepcionais com financiamento facilitado e atendimento premium
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-electric-blue hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-lg">
+                <button @click="window.location.href='{{ route('estoque') }}'" class="bg-electric-blue hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-lg">
                     <i class="fas fa-search mr-2"></i>Ver Estoque
                 </button>
                 <button class="border-2 border-white text-white hover:bg-white hover:text-steel-blue font-bold py-4 px-8 rounded-lg text-lg transition-all">

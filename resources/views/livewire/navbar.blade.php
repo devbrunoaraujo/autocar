@@ -3,8 +3,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex-shrink-0 flex items-center">
-                <h1 class="text-2xl font-bold text-white">{{ env('APP_NAME') }}</h1>
-                <i class="fas fa-car ml-2 text-electric-blue text-xl"></i>
+                <h1 class="text-2xl font-bold text-white"><a href="{{ route('home') }}">{{ env('APP_NAME') }}</a></h1>
+                {{-- ESPAÇO PARA COLOCAR A LOGO --}}
             </div>
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-8">
@@ -28,11 +28,11 @@
         x-transition:leave.duration.400ms>
 
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#home" class="text-white hover:text-electric-blue block px-3 py-2 text-base font-medium">Início</a>
+            <a href="{{ route('home') }}" class="text-white hover:text-electric-blue block px-3 py-2 text-base font-medium">Início</a>
             <a href="#financing" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Financiamento</a>
-            <a href="#about" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Sobre Nós</a>
+            <a href="{{ route('sobre') }}" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Sobre Nós</a>
             <a href="#contact" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Contato</a>
-            <a href="#" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Estoque</a>
+            <a href="{{ route('estoque') }}" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Estoque</a>
         </div>
     </div>
 </nav>

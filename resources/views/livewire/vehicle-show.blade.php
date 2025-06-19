@@ -5,7 +5,7 @@
                 <a href="{{ route('home') }}">
                     <i class="fas fa-arrow-left mr-2"></i>Voltar ao catálogo
                 </a>
-                
+
                 <!-- Vehicle Gallery Section -->
                 <!-- Vehicle Gallery Section -->
                 <div
@@ -59,7 +59,7 @@
                     <div>
                         <h1 id="vehicleTitle" class="text-3xl font-bold text-steel-blue mb-4">{{ $car->marca_nome }} - {{ $car->modelo_nome }}</h1>
                         <div class="text-4xl font-bold text-electric-blue mb-6">R$ {{ number_format($car->preco, 0, ',', '.') }}</div>
-                        
+
                         <div class="grid grid-cols-2 gap-4 mb-6">
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <div class="text-sm text-gray-600">Quilometragem</div>
@@ -81,20 +81,20 @@
                                 <div class="font-bold text-steel-blue">{{ $ano }}</div>
                             </div>
                         </div>
-                        
+
                         <div class="mb-6">
                             <h3 class="text-xl font-bold text-steel-blue mb-3">Opcionais</h3>
                             <div class="flex flex-wrap gap-2">
                             @foreach($car->options as $option)
                                 <span class="bg-electric-blue text-white px-3 py-1 rounded-full text-sm">{{$option->name}}</span>
-                            @endforeach 
-                                
+                            @endforeach
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                
+
                 <!-- CTA Section -->
                 <div class="bg-gradient-to-r from-electric-blue to-blue-600 text-white p-8 rounded-xl mb-12">
                     <div class="text-center">
@@ -104,8 +104,8 @@
                             <button class="bg-white text-electric-blue font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
                                 <i class="fas fa-phone mr-2"></i>Ligar Agora
                             </button>
-                            <button class="border-2 border-white text-white hover:bg-white hover:text-electric-blue font-bold py-3 px-6 rounded-lg transition-colors">
-                                <i class="fas fa-whatsapp mr-2"></i>WhatsApp
+                            <button class="border-2 flex flex-items-center border-white text-white hover:bg-white hover:text-electric-blue font-bold py-3 px-6 rounded-lg transition-colors">
+                                <x-fab-whatsapp class="w-5 h-5 mr-2"/>WhatsApp
                             </button>
                             <button class="border-2 border-white text-white hover:bg-white hover:text-electric-blue font-bold py-3 px-6 rounded-lg transition-colors">
                                 <i class="fas fa-calculator mr-2"></i>Simular Financiamento
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Similar Vehicles Section -->
                 @livewire('featured')
             </div>

@@ -78,7 +78,7 @@
                     <!-- Imagem principal -->
                     <div class="relative overflow-hidden rounded-2xl shadow-2xl">
                         <img
-                            src="https://images.unsplash.com/photo-1562141961-401ba4ba4b16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                            src="{{ asset('/storage/config/fachada.png') }}"
                             alt="AutoCar - Concessionária de Veículos Premium"
                             class="w-full h-96 object-cover"
                         >

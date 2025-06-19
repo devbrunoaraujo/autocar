@@ -8,7 +8,7 @@
             <!-- Team Member 1 -->
             <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all">
                 <div class="w-24 h-24 bg-gradient-to-br from-electric-blue to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-user text-white text-2xl"></i>
+                    <img src="{{ asset('/storage/config/avatar1.png') }}" alt="" class="w-24 h-24 rounded-full border-3 border-electric-blue shadow-md">
                 </div>
                 <h3 class="text-xl font-bold text-steel-blue mb-2">Carlos Silva</h3>
                 <p class="text-gray-600 mb-3">Especialista em SUVs</p>
@@ -22,7 +22,7 @@
             <!-- Team Member 2 -->
             <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all">
                 <div class="w-24 h-24 bg-gradient-to-br from-electric-blue to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-user text-white text-2xl"></i>
+                    <img src="{{ asset('/storage/config/avatar2.png') }}" alt="" class="w-24 h-24 rounded-full border-3 border-electric-blue shadow-md">
                 </div>
                 <h3 class="text-xl font-bold text-steel-blue mb-2">Ana Santos</h3>
                 <p class="text-gray-600 mb-3">Consultora Premium</p>
@@ -36,7 +36,7 @@
             <!-- Team Member 3 -->
             <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all">
                 <div class="w-24 h-24 bg-gradient-to-br from-electric-blue to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-user text-white text-2xl"></i>
+                    <img src="{{ asset('/storage/config/avatar3.png') }}" alt="" class="w-24 h-24 rounded-full border-3 border-electric-blue shadow-md">
                 </div>
                 <h3 class="text-xl font-bold text-steel-blue mb-2">Roberto Lima</h3>
                 <p class="text-gray-600 mb-3">Especialista em Sedans</p>
@@ -50,7 +50,7 @@
             <!-- Team Member 4 -->
             <div class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all">
                 <div class="w-24 h-24 bg-gradient-to-br from-electric-blue to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-user text-white text-2xl"></i>
+                    <img src="{{ asset('/storage/config/avatar4.png') }}" alt="" class="w-24 h-24 rounded-full border-3 border-electric-blue shadow-md">
                 </div>
                 <h3 class="text-xl font-bold text-steel-blue mb-2">Marina Costa</h3>
                 <p class="text-gray-600 mb-3">Consultora Financeira</p>
