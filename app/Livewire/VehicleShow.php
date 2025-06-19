@@ -11,7 +11,7 @@ class VehicleShow extends Component
 
     public function mount($id)
     {
-         $this->car = Car::findOrFail($id);
+         $this->car = Car::with('options')->findOrFail($id);
     }
 
     public function render()

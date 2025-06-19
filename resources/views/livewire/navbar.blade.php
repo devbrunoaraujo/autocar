@@ -12,7 +12,7 @@
                     <a href="#financing" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Financiamento</a>
                     <a href="#about" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Sobre Nós</a>
                     <a href="#contact" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Contato</a>
-                    <a href="#"class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Estoque</a>
+                    <a href="{{ route('estoque') }}"class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Estoque</a>
                 </div>
             </div>
             <div class="md:hidden">

@@ -1,135 +1,121 @@
-<div class="max-w-7xl mx-auto px-4 py-10 space-y-10">
-
-    <!-- Título -->
-    <div class="bg-gray-700 p-6 rounded-xl shadow-md">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-100">
-            {{ $car->marca_nome }} {{ $car->modelo_nome }} {{ $car->ano_nome }}
-        </h1>
-    </div>
-
-    <!-- Galeria + CTA lado a lado -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-        <!-- Galeria de imagens -->
-        <div x-data="{
-            active: 0,
-            images: @js($car->images ?? []),
-            setActive(index) { this.active = index }
-        }" class="bg-gray-700 p-4 rounded-xl shadow-md space-y-4">
-
-            <!-- Imagem ativa -->
-            <div class="w-full aspect-[4/3] rounded-lg overflow-hidden relative">
-                <!-- Botão esquerdo -->
-                <button
-                    @click="active = active > 0 ? active - 1 : images.length - 1"
-                    class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-700 rounded-full p-2 shadow transition"
-                    x-show="images.length > 1"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-
-                <!-- Botão direito -->
-                <button
-                    @click="active = active < images.length - 1 ? active + 1 : 0"
-                    class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-700 rounded-full p-2 shadow transition"
-                    x-show="images.length > 1"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5l7 7-7 7"/>
-                    </svg>
-                </button>
-
-                <!-- Galeria de imagens -->
-                <template x-for="(img, index) in images" :key="index">
-                    <img
-                        x-show="active === index"
-                        x-transition:enter="transition ease-out duration-300"
-                        x-transition:enter-start="opacity-0 scale-95"
-                        x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-200"
-                        x-transition:leave-start="opacity-100 scale-100"
-                        x-transition:leave-end="opacity-0 scale-95"
-                        :src="'/storage/' + img"
-                        class="absolute inset-0 w-full h-full object-cover"
-                        alt="Imagem do veículo"
-                    />
-                </template>
-            </div>
-
-
-            <!-- Miniaturas -->
-            <div class="flex space-x-2 overflow-x-auto pt-2 pb-1">
-                <template x-for="(img, index) in images" :key="index">
-                    <img :src="'/storage/' + img"
-                         :class="{'ring-2 ring-emerald-500': active === index}"
-                         class="w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-75 transition"
-                         @click="setActive(index)">
-                </template>
-            </div>
-        </div>
-
-        <!-- Bloco CTA e infos principais -->
-        <div class="bg-gray-700 p-6 rounded-xl shadow-md flex flex-col justify-between space-y-6">
-
-            <div class="space-y-3">
-                <div class="text-2xl font-bold text-gray-100">
-                    R$ {{ number_format($car->preco, 2, ',', '.') }}
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 text-sm text-gray-100">
-                    <div><span class="font-medium">Marca:</span> {{ $car->marca_nome }}</div>
-                    <div><span class="font-medium">Modelo:</span> {{ $car->modelo_nome }}</div>
-                    <div><span class="font-medium">Ano:</span> {{ $car->ano_nome }}</div>
-                    <!-- Exemplo de campo adicional -->
-                    {{-- <div><span class="font-medium">Km:</span> {{ $car->quilometragem }} km</div> --}}
-                </div>
-            </div>
-
-            <div class="space-y-4">
-                <a href="https://wa.me/{{ preg_replace('/\D/', '', $car->contato ?? '5599999999999') }}?text=Olá, tenho interesse no veículo {{ $car->marca_nome }} {{ $car->modelo_nome }}"
-                   class="block w-full text-center px-6 py-3 bg-emerald-700 text-gray-100 text-lg font-semibold rounded hover:bg-emerald-700 transition">
-                    Falar via WhatsApp
+<!-- VEHICLE DETAILS PAGE -->
+    <div id="vehicleDetailsPage" >
+        <div class="bg-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <a href="{{ route('home') }}">
+                    <i class="fas fa-arrow-left mr-2"></i>Voltar ao catálogo
                 </a>
+                
+                <!-- Vehicle Gallery Section -->
+                <!-- Vehicle Gallery Section -->
+                <div
+                    x-data="{
+                        images: @js(array_merge([$car->thumb], $car->images ?? [])),
+                        activeIndex: 0,
+                        prev() {
+                            this.activeIndex = (this.activeIndex - 1 + this.images.length) % this.images.length;
+                        },
+                        next() {
+                            this.activeIndex = (this.activeIndex + 1) % this.images.length;
+                        },
+                        setActive(index) {
+                            this.activeIndex = index;
+                        }
+                    }"
+                    class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
+                >
+                    <div>
+                        <!-- Imagem Principal -->
+                        <div class="relative bg-gray-100 rounded-xl h-96 flex items-center justify-center overflow-hidden mb-4">
+                            <template x-if="images.length > 0">
+                                <img :src="'/storage/' + images[activeIndex]" alt="Imagem do carro" class="object-contain h-full w-full transition-all duration-300">
+                            </template>
 
-                <div class="border-t pt-4">
-                    <p class="text-sm text-gray-100">
-                        Simulação em até 60x de:
-                        <span class="text-gray-100 font-semibold">
-                            R$ {{ number_format($car->preco / 60, 2, ',', '.') }}
-                        </span>
-                    </p>
-                    <button class="mt-3 w-full py-2 bg-rose-700 text-white rounded hover:bg-rose-800 transition">
-                        Simular Financiamento
-                    </button>
+                            <!-- Botões de Navegação -->
+                            <button @click="prev"
+                                    class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full hover:bg-opacity-75">
+                                &#8592;
+                            </button>
+                            <button @click="next"
+                                    class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full hover:bg-opacity-75">
+                                &#8594;
+                            </button>
+                        </div>
+
+                        <!-- Miniaturas -->
+                        <div class="grid grid-cols-4 gap-2">
+                            <template x-for="(image, index) in images" :key="index">
+                                <div @click="setActive(index)"
+                                    class="rounded-lg overflow-hidden cursor-pointer border-2"
+                                    :class="{ 'border-emerald-500': index === activeIndex, 'border-transparent': index !== activeIndex }">
+                                    <img :src="'/storage/' + image"
+                                        alt="Miniatura"
+                                        class="object-cover h-20 w-full hover:opacity-80 transition">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <!-- Vehicle Info -->
+                    <div>
+                        <h1 id="vehicleTitle" class="text-3xl font-bold text-steel-blue mb-4">{{ $car->marca_nome }} - {{ $car->modelo_nome }}</h1>
+                        <div class="text-4xl font-bold text-electric-blue mb-6">R$ {{ number_format($car->preco, 0, ',', '.') }}</div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Quilometragem</div>
+                                <div class="font-bold text-steel-blue">{{ $car->quilometragem }} km</div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Combustível</div>
+                                @php
+                                    list($ano, $comb) = explode(' ', $car->ano_nome, 2);
+                                @endphp
+                                <div class="font-bold text-steel-blue">{{ $comb }}</div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Transmissão</div>
+                                <div class="font-bold text-steel-blue">Automática</div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="text-sm text-gray-600">Ano</div>
+                                <div class="font-bold text-steel-blue">{{ $ano }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold text-steel-blue mb-3">Opcionais</h3>
+                            <div class="flex flex-wrap gap-2">
+                            @foreach($car->options as $option)
+                                <span class="bg-electric-blue text-white px-3 py-1 rounded-full text-sm">{{$option->name}}</span>
+                            @endforeach 
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                
+                <!-- CTA Section -->
+                <div class="bg-gradient-to-r from-electric-blue to-blue-600 text-white p-8 rounded-xl mb-12">
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold mb-4">Interessado neste veículo?</h2>
+                        <p class="text-blue-100 mb-6">Entre em contato conosco e agende um test drive!</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button class="bg-white text-electric-blue font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-phone mr-2"></i>Ligar Agora
+                            </button>
+                            <button class="border-2 border-white text-white hover:bg-white hover:text-electric-blue font-bold py-3 px-6 rounded-lg transition-colors">
+                                <i class="fas fa-whatsapp mr-2"></i>WhatsApp
+                            </button>
+                            <button class="border-2 border-white text-white hover:bg-white hover:text-electric-blue font-bold py-3 px-6 rounded-lg transition-colors">
+                                <i class="fas fa-calculator mr-2"></i>Simular Financiamento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Similar Vehicles Section -->
+                @livewire('featured')
             </div>
         </div>
     </div>
-
-    <!-- Descrição e detalhes adicionais -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <!-- Descrição -->
-        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
-            @livewire('list-options')
-        </div>
-
-        <!-- Detalhes técnicos -->
-        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
-            <h2 class="text-xl font-semibold text-gray-100 mb-4">Detalhes Técnicos</h2>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-100 text-sm">
-                <li><strong>Marca:</strong> {{ $car->marca_nome }}</li>
-                <li><strong>Modelo:</strong> {{ $car->modelo_nome }}</li>
-                <li><strong>Ano:</strong> {{ $car->ano_nome }}</li>
-                <li><strong>Preço:</strong> R$ {{ number_format($car->preco, 2, ',', '.') }}</li>
-                {{-- Adicione mais características aqui --}}
-            </ul>
-        </div>
-    </div>
-</div>
