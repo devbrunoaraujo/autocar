@@ -9,7 +9,7 @@
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-8">
                     <a href="{{ route('home') }}" class="text-white hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Início</a>
-                    <a href="#financing" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Financiamento</a>
+                    <a href="{{ route('financing.index') }}" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Financiamento</a>
                     <a href="{{ route('sobre') }}" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Sobre Nós</a>
                     <a href="#contact" class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Contato</a>
                     <a href="{{ route('estoque') }}"class="text-gray-300 hover:text-electric-blue px-3 py-2 text-sm font-medium transition-colors">Estoque</a>
