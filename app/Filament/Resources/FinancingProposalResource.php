@@ -46,10 +46,6 @@ class FinancingProposalResource extends Resource
                 ->dateTime('d/m/Y H:i'),
                 Tables\Columns\TextColumn::make('full_name')
                 ->label('Cliente'),
-                Tables\Columns\TextColumn::make('cpf')
-                ->label('CPF'),
-                Tables\Columns\TextColumn::make('email')
-                ->label('E-mail'),
                 Tables\Columns\TextColumn::make('phone')
                 ->label('Telefone')
             ])
@@ -57,7 +53,9 @@ class FinancingProposalResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
