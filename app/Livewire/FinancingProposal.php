@@ -123,7 +123,7 @@ class FinancingProposal extends Component
             'down_payment' => $this->down_payment,
             'installments' => $this->installments,
             'marketing_consent' => $this->marketing_consent,
-            'status' => 'pending',
+            'status' => 'pendente',
         ]);
 
         session()->flash('success', 'Proposta enviada com sucesso! Entraremos em contato em breve.');
