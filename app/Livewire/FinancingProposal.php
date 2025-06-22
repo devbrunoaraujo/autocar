@@ -73,9 +73,7 @@ class FinancingProposal extends Component
     // CORREÇÃO PRINCIPAL: Método deve ser chamado quando car_id muda
     public function updatedCarId($value)
     {
-        \Log::info('updatedCarId chamado com valor: ' . $value);
-
-        // Limpa os campos primeiro
+         // Limpa os campos primeiro
         $this->reset(['vehicle_brand', 'vehicle_model', 'vehicle_year', 'vehicle_price']);
 
         if (empty($value)) {
