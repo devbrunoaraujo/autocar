@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FinancingProposalModel extends Model
 {
@@ -154,5 +155,10 @@ class FinancingProposalModel extends Model
     public function hasMarketingConsent(): bool
     {
         return $this->marketing_consent;
+    }
+
+    public function cars(): BelongsTo
+    {
+        return $this->belongsTo(Car::class);
     }
 }

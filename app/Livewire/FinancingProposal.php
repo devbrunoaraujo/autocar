@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Car;
 use App\Models\FinancingProposalModel;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -9,7 +10,14 @@ use Livewire\Component;
 class FinancingProposal extends Component
 {
     public $currentStep = 1;
+    public $car_id = null;
+    public $list_cars = [];
     public $totalSteps = 4;
+
+    public function mount()
+    {
+        $this->list_cars = Car::all();
+    }
 
     // Dados do veículo
     #[Validate('required|string|max:255')]
@@ -28,13 +36,13 @@ class FinancingProposal extends Component
     #[Validate('required|string|max:255')]
     public $full_name = '';
 
-    #[Validate('required|string|size:11')]
+    #[Validate('required|numeric|digits:11')]
     public $cpf = '';
 
     #[Validate('required|email|max:255')]
     public $email = '';
 
-    #[Validate('required|string|size:11')]
+    #[Validate('required|numeric|digits:11')]
     public $phone = '';
 
     #[Validate('required|date|before:today')]
@@ -62,6 +70,62 @@ class FinancingProposal extends Component
 
     public $marketing_consent = false;
 
+    // CORREÇÃO PRINCIPAL: Método deve ser chamado quando car_id muda
+    public function updatedCarId($value)
+    {
+        \Log::info('updatedCarId chamado com valor: ' . $value);
+
+        // Limpa os campos primeiro
+        $this->reset(['vehicle_brand', 'vehicle_model', 'vehicle_year', 'vehicle_price']);
+
+        if (empty($value)) {
+            return;
+        }
+
+        $car = Car::find($value);
+
+        if ($car) {
+            // Extrai apenas o ano do campo ano_nome (ex: "2025 Gasolina" -> 2025)
+            $year = $this->extractYearFromString($car->ano_nome);
+
+            // Use fill() para garantir que todas as propriedades sejam atualizadas
+            $this->fill([
+                'vehicle_brand' => $car->marca_nome,
+                'vehicle_model' => $car->modelo_nome,
+                'vehicle_year' => $year,
+                'vehicle_price' => $car->preco,
+            ]);
+        }
+    }
+
+    /**
+     * Extrai o ano de uma string como "2025 Gasolina"
+     */
+    private function extractYearFromString($yearString)
+    {
+        // Remove tudo que não for número
+        $year = preg_replace('/[^0-9]/', '', $yearString);
+
+        // Se encontrou um número de 4 dígitos que parece ser um ano válido
+        if (strlen($year) >= 4) {
+            $year = substr($year, 0, 4); // Pega os primeiros 4 dígitos
+            $yearInt = (int) $year;
+
+            // Valida se é um ano válido (entre 1900 e 2030)
+            if ($yearInt >= 1900 && $yearInt <= 2030) {
+                return $yearInt;
+            }
+        }
+
+        // Se não conseguiu extrair, tenta usar regex mais específica
+        if (preg_match('/(\d{4})/', $yearString, $matches)) {
+            return (int) $matches[1];
+        }
+
+        // Fallback: retorna null ou um valor padrão
+        return null;
+    }
+
     public function nextStep()
     {
         $this->validateCurrentStep();
@@ -82,6 +146,7 @@ class FinancingProposal extends Component
     {
         match($this->currentStep) {
             1 => $this->validate([
+
                 'vehicle_brand' => 'required|string|max:255',
                 'vehicle_model' => 'required|string|max:255',
                 'vehicle_year' => 'required|integer|min:1900|max:2025',
@@ -89,9 +154,9 @@ class FinancingProposal extends Component
             ]),
             2 => $this->validate([
                 'full_name' => 'required|string|max:255',
-                'cpf' => 'required|string|size:11',
+                'cpf' => 'required|numeric|digits:11',
                 'email' => 'required|email|max:255',
-                'phone' => 'required|string|size:11',
+                'phone' => 'required|numeric|digits:11',
                 'birth_date' => 'required|date|before:today',
             ]),
             3 => $this->validate([
@@ -127,10 +192,8 @@ class FinancingProposal extends Component
         ]);
 
         session()->flash('success', 'Proposta enviada com sucesso! Entraremos em contato em breve.');
-        return redirect()->route('financing.success');
+        return redirect()->route('sucesso');
     }
-
-
 
     public function render()
     {

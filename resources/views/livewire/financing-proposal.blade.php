@@ -8,7 +8,7 @@
                 </svg>
             </div>
             <h1 class="text-4xl font-bold text-white mb-4">
-                💰 Financie seu Carro dos Sonhos!
+                Financie seu Carro dos Sonhos!
             </h1>
             <p class="text-xl text-gray-300 max-w-2xl mx-auto">
                 Aprovação rápida, taxas especiais e condições imperdíveis.
@@ -46,36 +46,55 @@
         <!-- Main Form Card -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
             <form wire:submit="submit">
+
                 <!-- Step 1: Vehicle Information -->
+
                 @if ($currentStep === 1)
                     <div class="space-y-6">
                         <div class="text-center mb-8">
-                            <h2 class="text-3xl font-bold text-steel-blue mb-2">🚗 Qual veículo você deseja?</h2>
+                            <h2 class="text-3xl font-bold text-steel-blue mb-2">Qual veículo você deseja?</h2>
                             <p class="text-gray-600">Conte-nos sobre o carro dos seus sonhos</p>
+                        </div>
+
+                        <!-- Select de veículos -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Selecione o veículo</label>
+                            <select wire:model.live="car_id" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                <option value="">-- Escolha um veículo --</option>
+                                @foreach($list_cars as $car)
+                                    <option value="{{ $car->id }}">
+                                        {{ $car->marca_nome }} {{ $car->modelo_nome }} - {{ $car->ano_nome }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('car_id') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Marca</label>
-                                <input type="text" wire:model="vehicle_brand"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
-                                    placeholder="Ex: Toyota, Honda, Ford...">
+                                <input type="text" wire:model.live="vehicle_brand" readonly
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                                    placeholder="Ex: Toyota, Honda, Ford..."
+                                    value="{{ $vehicle_brand }}">
                                 @error('vehicle_brand') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Modelo</label>
-                                <input type="text" wire:model="vehicle_model"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
-                                    placeholder="Ex: Corolla, Civic, Focus...">
+                                <input type="text" wire:model.live="vehicle_model" readonly
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                                    placeholder="Ex: Corolla, Civic, Focus..."
+                                    value="{{ $vehicle_model }}">
                                 @error('vehicle_model') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Ano</label>
-                                <input type="number" wire:model="vehicle_year"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
-                                    placeholder="2024" min="1900" max="2025">
+                                <input type="number" wire:model.live="vehicle_year" readonly
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                                    placeholder="2024" min="1900" max="2030"
+                                    value="{{ $vehicle_year }}">
                                 @error('vehicle_year') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
 
@@ -83,9 +102,10 @@
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Valor do Veículo</label>
                                 <div class="relative">
                                     <span class="absolute left-3 top-3 text-gray-500">R$</span>
-                                    <input type="number" wire:model="vehicle_price"
-                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
-                                        placeholder="50.000" min="1000" step="100">
+                                    <input type="text" wire:model.live="vehicle_price" readonly
+                                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                                        placeholder="50.000"
+                                        value="{{ $vehicle_price }}">
                                 </div>
                                 @error('vehicle_price') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
@@ -112,9 +132,11 @@
                 @if ($currentStep === 2)
                     <div class="space-y-6">
                         <div class="text-center mb-8">
-                            <h2 class="text-3xl font-bold text-steel-blue mb-2">👤 Seus dados pessoais</h2>
+                            <h2 class="text-3xl font-bold text-steel-blue mb-2">Seus dados pessoais</h2>
                             <p class="text-gray-600">Precisamos conhecer você melhor para oferecer as melhores condições</p>
                         </div>
+
+
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div class="md:col-span-2">
@@ -125,6 +147,8 @@
                                 @error('full_name') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
 
+
+
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">CPF</label>
                                 <input type="text" wire:model="cpf"
@@ -133,12 +157,16 @@
                                 @error('cpf') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
 
+
+
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Data de Nascimento</label>
                                 <input type="date" wire:model="birth_date"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all">
                                 @error('birth_date') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
+
+
 
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">E-mail</label>
@@ -147,6 +175,8 @@
                                     placeholder="seu@email.com">
                                 @error('email') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
                             </div>
+
+
 
                             <div>
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Telefone/WhatsApp</label>
@@ -175,7 +205,7 @@
                 @if ($currentStep === 3)
                     <div class="space-y-6">
                         <div class="text-center mb-8">
-                            <h2 class="text-3xl font-bold text-steel-blue mb-2">💼 Informações financeiras</h2>
+                            <h2 class="text-3xl font-bold text-steel-blue mb-2">Informações financeiras</h2>
                             <p class="text-gray-600">Conte-nos sobre sua renda para calcularmos as melhores condições</p>
                         </div>
 
@@ -383,13 +413,27 @@
 
     <!-- Success Message -->
     @if (session()->has('success'))
-        <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-slide-up">
-            <div class="flex items-center">
-                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                {{ session('success') }}
+        <div
+            x-data="{ show: true }"
+            x-init="setTimeout(() => show = false, 4000)"
+            x-show="show"
+            x-transition:leave.opacity.duration.500ms
+            class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-slide-up"
+        >
+            <div class="flex items-center justify-between space-x-4">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ session('success') }}</span>
+                </div>
+                <button @click="show = false" class="text-white hover:text-gray-200 transition">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
             </div>
         </div>
     @endif
+
 </div>

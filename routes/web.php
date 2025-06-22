@@ -14,11 +14,11 @@ Route::get('/veiculo/{id}', VehicleShow::class)->name('veiculo');
 Route::get('/sobre-nos', AboutUs::class)->name('sobre');
 
 // Página principal do financiamento
-Route::get('/financiamento', FinancingProposal::class)
+Route::get('/financiamento/{car_id?}', FinancingProposal::class)
     ->name('financing.index');
 
 // Página de sucesso
-Route::get('/financiamento/sucesso', Success::class)->name('financing.success');
+Route::get('/financiamento/sucesso', Success::class)->name('sucesso');
 
 // Política de Privacidade e Termos (LGPD)
 Route::get('/politica-privacidade', function () {

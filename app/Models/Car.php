@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class Car extends Model
@@ -55,5 +56,10 @@ class Car extends Model
     public function options(): BelongsToMany
     {
         return $this->belongsToMany(Options::class);
+    }
+
+    public function financingProposals(): HasMany
+    {
+        return $this->hasMany(FinancingProposalModel::class);
     }
 }
