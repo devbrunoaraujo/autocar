@@ -134,6 +134,14 @@ class CarResource extends Resource
                             ->prefix('Km')
                             ->required(),
 
+
+                        Select::make('cambio')
+                            ->label('Câmbio')
+                            ->options([
+                                'Automático' => 'Automático',
+                                'Manual' => 'Manual'
+                            ])
+
                     ])
                     ->columns(1),            
 

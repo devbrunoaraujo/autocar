@@ -22,7 +22,7 @@
 
     {{-- Rodapé (Livewire) --}}
     @livewire('footer')
-
+    
     @livewireScripts
     @stack('scripts')
 

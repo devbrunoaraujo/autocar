@@ -74,7 +74,7 @@
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <div class="text-sm text-gray-600">Transmissão</div>
-                                <div class="font-bold text-steel-blue">Automática</div>
+                                <div class="font-bold text-steel-blue">{{ $car->cambio }}</div>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <div class="text-sm text-gray-600">Ano</div>

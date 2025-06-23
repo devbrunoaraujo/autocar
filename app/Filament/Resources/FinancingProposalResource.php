@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Car;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\RichEditor;
 
 class FinancingProposalResource extends Resource
 {
@@ -47,7 +48,12 @@ class FinancingProposalResource extends Resource
                             ->searchable()
                             ->preload()
                             ->required()
-                            ->reactive(),
+                            ->reactive()
+                            ->afterStateUpdated(function (callable $set) {
+                                $set('vehicle_model', null);
+                                $set('vehicle_year', null);
+                                $set('vehicle_price', null);
+                            }),
 
                         Select::make('vehicle_model')
                             ->label('Modelo')
@@ -100,9 +106,6 @@ class FinancingProposalResource extends Resource
                                 return Car::where('ano_nome', $selectedYear)
                                     ->pluck('preco', 'preco') // chave = model, valor = model
                                     ->toArray();
-                            })
-                            ->dehydrateStateUsing(function (string $state) {
-                                return preg_replace('/\D/', '', strtok($state, ' '));
                             })
                             ->searchable()
                             ->preload()
@@ -167,7 +170,6 @@ class FinancingProposalResource extends Resource
                                 '0' => 'Não',
                                 '1' => 'Sim'
                             ])
-                            ->required()
                             ->label('Deseja receber promoções?'),
 
                             Select::make('status')
@@ -179,9 +181,7 @@ class FinancingProposalResource extends Resource
                                 'em_analise' => 'em analise'
                             ])
                             ->label('Status'),
-
-                            TextInput::make('notes')
-                            ->label('Observações'),
+                            
 
                             TextInput::make('reviewed_at')
                                 ->label('Visto em:')
@@ -197,7 +197,10 @@ class FinancingProposalResource extends Resource
                             ->label('Criado em:'),
 
                             TextInput::make('updated_at')
-                            ->label('Última atualização:'),                            
+                            ->label('Última atualização:'),  
+                            
+                            RichEditor::make('notes')
+                            ->label('Observações'),
                     ])
                           
             ]);

@@ -102,7 +102,7 @@
                                 <label class="block text-sm font-medium text-steel-blue mb-2">Valor do Veículo</label>
                                 <div class="relative">
                                     <span class="absolute left-3 top-3 text-gray-500">R$</span>
-                                    <input type="text" wire:model.live="vehicle_price" readonly
+                                    <input type="number" wire:model.live="vehicle_price" readonly
                                         class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
                                         placeholder="50.000"
                                         value="{{ $vehicle_price }}">
@@ -291,20 +291,20 @@
                         <!-- LGPD Terms -->
                         <div class="space-y-4">
                             <div class="flex items-start">
-                                <input type="checkbox" wire:model="accept_terms" id="accept_terms"
+                                <input type="checkbox"  id="accept_terms" wire:model="accept_terms"
                                     class="mt-1 h-4 w-4 text-electric-blue focus:ring-electric-blue border-gray-300 rounded">
                                 <label for="accept_terms" class="ml-3 text-sm text-gray-700">
-                                    Eu aceito os <a href="#" class="text-electric-blue hover:underline">Termos de Uso</a> e
+                                    Eu aceito os <a href="#" x-on:click.prevent="$dispatch('open-terms-modal')" class="text-electric-blue hover:underline">Termos de Uso</a> e
                                     confirmo que todas as informações fornecidas são verdadeiras. *
                                 </label>
                             </div>
                             @error('accept_terms') <span class="text-deep-red text-sm">{{ $message }}</span> @enderror
 
                             <div class="flex items-start">
-                                <input type="checkbox" wire:model="accept_privacy" id="accept_privacy"
+                                <input type="checkbox" id="accept_privacy" wire:model="accept_privacy"
                                     class="mt-1 h-4 w-4 text-electric-blue focus:ring-electric-blue border-gray-300 rounded">
                                 <label for="accept_privacy" class="ml-3 text-sm text-gray-700">
-                                    Eu aceito a <a href="#" class="text-electric-blue hover:underline">Política de Privacidade</a>
+                                    Eu aceito a <a href="#" x-on:click.prevent="$dispatch('open-privacy-modal')" class="text-electric-blue hover:underline">Política de Privacidade</a>
                                     e autorizo o tratamento dos meus dados pessoais conforme a LGPD. *
                                 </label>
                             </div>
@@ -318,7 +318,11 @@
                                 </label>
                             </div>
                         </div>
+                         @livewire('terms-of-service')
+                         @livewire('privacy-policy')
+                           
 
+                        
                         <div class="bg-electric-blue/10 border border-electric-blue/20 p-6 rounded-lg">
                             <div class="flex items-center mb-2">
                                 <svg class="w-5 h-5 text-electric-blue mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -435,5 +439,7 @@
             </div>
         </div>
     @endif
+    
+     
 
 </div>

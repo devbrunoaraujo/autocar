@@ -22,6 +22,7 @@ class Car extends Model
         'is_active',
         'is_featured',
         'quilometragem',
+        'cambio',
         'combustivel',
         'comentario'
     ];
