@@ -12,7 +12,7 @@
                     <div class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer">
                         <div class="relative">
                             <div class="h-48 bg-gradient-to-br from-gray-200 to-gray-100 flex items-center justify-center">
-                                <img src="{{ asset('storage/' . $car->thumb) }}" alt="{{ $car->modelo_nome }}" class="h-full max-h-48 w-auto object-contain">
+                                <img src="{{ asset('storage/' . $car->thumb) }}" alt="{{ $car->modelo_nome }}" class="w-full h-full object-cover">
                             </div>
                             <div class="absolute top-4 right-4 bg-deep-red text-white px-3 py-1 rounded-full text-sm font-bold">
                                 DESTAQUE
@@ -24,7 +24,7 @@
                             <div class="flex justify-between items-center">
                                 <span class="text-2xl font-bold text-emerald-600">R$ {{ number_format($car->preco, 0, ',','.') }}</span>
                                 <span class="text-sm text-gray-500">{{ $car->ano_nome }}</span>
-                                <span class="text-sm text-gray-500">{{ $car->quilometragem }}</span>
+                                <span class="text-sm text-gray-500">{{ $car->quilometragem }} Km</span>
                             </div>
                         </div>
                     </div>

@@ -18,8 +18,8 @@ class OptionsResource extends Resource
     protected static ?string $model = Options::class;
     
     protected static ?string $modelLabel = 'Opcionais';
-
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    
+    protected static ?string $navigationIcon = 'heroicon-m-list-bullet';
 
     public static function form(Form $form): Form
     {
