@@ -16,7 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Car;
-use App\Models\Customer;git 
+use App\Models\Customer;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
@@ -40,7 +40,7 @@ class FinancingProposalResource extends Resource
             ->schema([
                  Fieldset::make('Informações do Cliente')
                     ->schema([
-                        
+
                         Select::make('vehicle_brand')
                             ->label('Marca')
                             ->options(fn () => Car::query()
@@ -76,7 +76,7 @@ class FinancingProposalResource extends Resource
                             ->preload()
                             ->required()
                             ->reactive(),
-                            
+
                         Select::make('vehicle_year')
                             ->label('Ano')
                             ->options(function (callable $get) {
@@ -115,13 +115,13 @@ class FinancingProposalResource extends Resource
                             ->preload()
                             ->required()
                             ->reactive(),
-                        
+
 
 
                         TextInput::make('full_name')
                             ->required()
                             ->label('Nome completo'),
-                            
+
                             TextInput::make('cpf')
                             ->required()
                             ->mask('999.999.999-99')
@@ -135,7 +135,7 @@ class FinancingProposalResource extends Resource
 
                             TextInput::make('phone')
                             ->required()
-                            ->tel() 
+                            ->tel()
                             ->mask('(99) 9 9999-9999')
                             ->dehydrateStateUsing(fn (string $state) => preg_replace('/\D/', '', $state))
                             ->label('Telefone/whatsApp'),
@@ -185,7 +185,7 @@ class FinancingProposalResource extends Resource
                                 'em_analise' => 'em analise'
                             ])
                             ->label('Status'),
-                            
+
 
                             TextInput::make('reviewed_at')
                                 ->label('Visto em:')
@@ -201,12 +201,12 @@ class FinancingProposalResource extends Resource
                             ->label('Criado em:'),
 
                             TextInput::make('updated_at')
-                            ->label('Última atualização:'),  
-                            
+                            ->label('Última atualização:'),
+
                             RichEditor::make('notes')
                             ->label('Observações'),
                     ])
-                          
+
             ]);
     }
 
