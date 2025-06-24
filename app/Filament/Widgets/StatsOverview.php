@@ -12,8 +12,14 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Propostas de financiamento', FinancingProposalModel::query()->count()),
-            Stat::make('Carros cadastrados', Car::query()->count()),
+            Stat::make('Propostas de financiamento', FinancingProposalModel::query()->count())
+            ->description('3% increase')
+            ->descriptionIcon('heroicon-m-arrow-trending-down')
+            ->color('danger'),
+            Stat::make('Carros cadastrados', Car::query()->count())
+            ->description('3% increase')
+            ->descriptionIcon('heroicon-m-arrow-trending-up')
+            ->color('success'),
         ];
     }
 }
