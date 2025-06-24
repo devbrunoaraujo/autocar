@@ -31,6 +31,7 @@ class FinancingProposalModel extends Model
         'notes',
         'reviewed_at',
         'reviewed_by',
+        'customer_id'
     ];
 
     protected $casts = [
@@ -160,5 +161,10 @@ class FinancingProposalModel extends Model
     public function cars(): BelongsTo
     {
         return $this->belongsTo(Car::class);
+    }
+
+    public function customers(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
     }
 }

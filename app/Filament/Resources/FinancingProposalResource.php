@@ -16,9 +16,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Car;
+use App\Models\Customer;git 
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
+use Filament\Notifications\Notification;
+use Filament\Tables\Actions\Action;
+
 
 class FinancingProposalResource extends Resource
 {
@@ -233,7 +237,43 @@ class FinancingProposalResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
+                Action::make('addCustomer')
+                    ->label('Adicionar como Cliente')
+                    ->icon('heroicon-o-user-plus')
+                    ->requiresConfirmation()
+                    ->color('success')
+                    ->action(function ($record) {
+                        // 1️⃣ Verifica se o cliente existe por e‑mail
+                        $customer = Customer::where('email', $record->email)->first();
+
+                        // 2️⃣ Se não existir, cria
+                        if (! $customer) {
+                            $customer = Customer::create([
+                                'full_name'  => $record->full_name,
+                                'phone' => $record->phone,
+                                'email' => $record->email,
+                                'cpf'   => $record->cpf,
+                                'birth_date' => $record->birth_date,
+                                'monthly_income' => $record->monthly_income,
+                                'profession' => $record->profession,
+                            ]);
+
+                            $mensagem = 'Cliente criado e vinculado com sucesso!';
+                        } else {
+                            $mensagem = 'Cliente encontrado e vinculado com sucesso!';
+                        }
+
+                        // 3️⃣ Vincula o cliente à proposta atual
+                        $record->customer_id = $customer->id;
+                        $record->save();
+
+                    // 4️⃣ Notificação
+                    Notification::make()
+                        ->title($mensagem)
+                        ->success()
+                        ->send();
+                    }),
+                ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
