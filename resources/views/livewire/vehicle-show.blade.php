@@ -187,7 +187,7 @@
                                 </div>
                             </button>
                             
-                            <button class="border-2 border-white text-white hover:bg-white hover:text-electric-blue font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center">
+                            <button wire:click="goToFinancing" class="border-2 border-white text-white hover:bg-white hover:text-electric-blue font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center">
                                 <i class="fas fa-calculator mr-3 text-lg"></i>
                                 <div class="text-left">
                                     <div class="font-bold">Simular Financiamento</div>

@@ -26,11 +26,11 @@
             <div>
                 <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
                 <ul class="space-y-2">
-                    <li><a href="#home" class="text-gray-300 hover:text-electric-blue">Início</a></li>
-                    <li><a href="#financing" class="text-gray-300 hover:text-electric-blue">Financiamento</a></li>
+                    <li><a href="{{route('home')}}" class="text-gray-300 hover:text-electric-blue">Início</a></li>
+                    <li><a href="{{route('financing.index')}}" class="text-gray-300 hover:text-electric-blue">Financiamento</a></li>
                     <li><a href="{{ route('sobre') }}" class="text-gray-300 hover:text-electric-blue">Sobre Nós</a></li>
                     <li><a href="#contact" class="text-gray-300 hover:text-electric-blue">Contato</a></li>
-                    <li><a href="#" onclick="showInventoryPage()" class="text-gray-300 hover:text-electric-blue">Estoque</a></li>
+                    <li><a href="{{ route('estoque') }}" class="text-gray-300 hover:text-electric-blue">Estoque</a></li>
                 </ul>
             </div>
 
@@ -39,7 +39,7 @@
                 <h4 class="text-lg font-bold mb-4">Serviços</h4>
                 <ul class="space-y-2">
                     <li><a href="#" class="text-gray-300 hover:text-electric-blue">Venda de Veículos</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-electric-blue">Financiamento</a></li>
+                    <li><a href="{{ route('financing.index') }}" class="text-gray-300 hover:text-electric-blue">Financiamento</a></li>
                     <li><a href="#" class="text-gray-300 hover:text-electric-blue">Seguro Auto</a></li>
                     <li><a href="#" class="text-gray-300 hover:text-electric-blue">Avaliação</a></li>
                     <li><a href="#" class="text-gray-300 hover:text-electric-blue">Consultoria</a></li>

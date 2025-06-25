@@ -67,13 +67,13 @@
 
                     <!-- Botões melhorados -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <button wire:click="redirectToEstoque"
+                        <button wire:click="goToStock"
                             class="group bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-2xl hover:shadow-blue-500/25">
                             <i class="fas fa-search mr-2 group-hover:animate-bounce"></i>
                             Ver Estoque Completo
                             <i class="fas fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                         </button>
-                        <button wire:click="abrirSimulador"
+                        <button wire:click="goToFinancing"
                             class="group bg-white/10 backdrop-blur-md border-2 border-white text-white hover:bg-white hover:text-gray-800 font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105">
                             <i class="fas fa-calculator mr-2 group-hover:animate-spin"></i>
                             Simular Financiamento

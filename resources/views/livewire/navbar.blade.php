@@ -29,7 +29,7 @@
 
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a href="{{ route('home') }}" class="text-white hover:text-electric-blue block px-3 py-2 text-base font-medium">Início</a>
-            <a href="#financing" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Financiamento</a>
+            <a href="{{ route('financing.index') }}" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Financiamento</a>
             <a href="{{ route('sobre') }}" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Sobre Nós</a>
             <a href="#contact" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Contato</a>
             <a href="{{ route('estoque') }}" class="text-gray-300 hover:text-electric-blue block px-3 py-2 text-base font-medium">Estoque</a>

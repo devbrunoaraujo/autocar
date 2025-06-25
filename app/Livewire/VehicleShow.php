@@ -18,4 +18,9 @@ class VehicleShow extends Component
     {
         return view('livewire.vehicle-show')->layout('components.layouts.app');
     }
+
+    public function goToFinancing()
+    {
+        return redirect()->route('financing.index');
+    }
 }
