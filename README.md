@@ -1,60 +1,126 @@
-AutoCar - Plataforma de Revenda de Veículos
-AutoCar é uma plataforma completa para revenda de automóveis, oferecendo uma experiência moderna tanto para clientes quanto para administradores. O sistema permite a navegação por um catálogo de veículos, simulação e envio de propostas de financiamento, além de um painel administrativo robusto para gestão de estoque e propostas.
 
-Funcionalidades
-Catálogo de Veículos: Pesquisa, filtros dinâmicos (marca, modelo, ano, preço), visualização detalhada e destaques.
-Simulação de Financiamento: Formulário passo a passo, cálculo de parcelas, envio de proposta e acompanhamento do status.
-Gestão Administrativa: Painel Filament para cadastro, edição e exclusão de veículos, controle de propostas de financiamento e clientes.
-Integração FIPE: Consulta automática de marcas, modelos, anos e preços via API FIPE.
-LGPD: Termos de uso, política de privacidade e consentimento explícito no envio de propostas.
-Responsivo: Interface adaptada para dispositivos móveis e desktop.
-Recursos Extras: Estatísticas, equipe, diferenciais, banners promocionais e contato.
-Tecnologias Utilizadas
-Backend: Laravel 10+, Livewire, Eloquent ORM
-Frontend: Blade, TailwindCSS, Alpine.js, FontAwesome
-Painel Admin: Filament
-Banco de Dados: MySQL/MariaDB
-Integração: API FIPE (https://parallelum.com.br/fipe/api/v1)
-Outros: Vite, Composer, NPM
-Instalação
-Clone o repositório:
-git clone https://github.com/seu-usuario/autocar.git
-cd autocar
+# AutoCar - Plataforma de Revenda de Veículos
 
-Instale as dependências:
-composer install
-npm install
+AutoCar é uma plataforma completa para revenda de automóveis, oferecendo uma experiência moderna e intuitiva tanto para clientes quanto para administradores. O sistema permite:
+
+Navegação por catálogo de veículos
+
+Simulação e envio de propostas de financiamento
+
+Painel administrativo completo para gestão de estoque e propostas
 
 
-Configure o ambiente:
+## Funcionalidades
+🔍 Catálogo de Veículos
+Pesquisa avançada com filtros por marca, modelo, ano e preço. Visualização detalhada com destaques.
 
-Copie .env.example para .env e ajuste as variáveis (DB, FIPE, etc).
-Gere a chave da aplicação:
-php artisan key:generate
+💰 Proposta de Financiamento
+Formulário interativo passo a passo para envio de propostas de financiamento.
 
-Execute as migrações e seeders:
-php artisan migrate --seed
+🛠️ Gestão Administrativa (Filament)
+Cadastro, edição e exclusão de veículos, controle de propostas e clientes.
 
-Compile os assets:
-npm run build
+🔗 Integração FIPE
+Consulta automática de marcas, modelos e preços via API FIPE.
 
-Inicie o servidor:
-php artisan serve
+🛡️ LGPD
+Termos de uso, política de privacidade e consentimento explícito nas propostas.
 
-Acesse em http://localhost:8000
+📱 Design Responsivo
+Interface otimizada para dispositivos móveis e desktop.
 
-Painel Administrativo
-Acesse /admin (ou conforme configuração do Filament)
-Crie um usuário admin com:
-php artisan make:filament-user
+📊 Extras
+Estatísticas, equipe, diferenciais, banners promocionais e formulário de contato.## Stack utilizada
 
-Estrutura Principal
-Models - Modelos Eloquent (Car, FinancingProposalModel, Customer)
-Livewire - Componentes Livewire (filtros, listagem, formulário de financiamento)
-Resources - Recursos do painel administrativo
-livewire - Views dos componentes
-migrations - Estrutura do banco de dados
-Observações
-O projeto segue as melhores práticas de segurança e privacidade (LGPD).
-A integração FIPE exige configuração da URL no .env e em services.php.
-Para dúvidas, consulte os arquivos de exemplo e comentários no código.
+**Back-end:** Laravel, Livewire, Eloquent ORM
+
+**Front-end:** Blade, TailwindCSS, Alpine.js, FontAwesome
+
+**Banco de dados:** MySQL / MariaDB
+
+**Integração** API FIPE
+
+**Outros** Vite, Composer, NPM
+## Instalação
+
+1. Clone o repositório
+
+```bash
+ git clone https://github.com/devbrunoaraujo/autocar.git
+    cd autocar
+
+```
+
+2. Instale as dependências
+
+```bash
+ composer install
+ npm install
+
+```
+
+3. Configure o ambiente
+    - copie o arquivo .env.example para .env
+
+```bash
+ cp .env.example .env
+
+```
+
+4. Gere a chave da aplicação
+
+```bash
+ php artisan key:generate
+
+```
+
+5. Execute migrações e seeders
+
+```bash
+ php artisan migrate --seed
+
+```
+
+6. Compile os assets
+
+```bash
+ npm run build
+
+```
+
+7. Inicie o servidor
+
+```bash
+ php artisan serve
+
+```
+
+
+    
+# Painel Administrativo
+
+Acesse: http://localhost:8000/admin
+
+Crie um usuário administrador com o comando:
+
+
+```bash
+    php artisan make:filament-user
+
+```
+
+
+## Estrutura
+
+├── app/
+│   ├── Models/                # Car, FinancingProposalModel, Customer
+│   └── Livewire/             # Componentes Livewire
+│
+├── resources/
+│   └── views/livewire/       # Views dos componentes
+│
+├── database/
+│   └── migrations/           # Estrutura do banco de dados
+│
+├── routes/
+│   └── web.php               # Rotas do sistema
