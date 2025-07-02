@@ -108,19 +108,3 @@ Crie um usuário administrador com o comando:
     php artisan make:filament-user
 
 ```
-
-
-## Estrutura
-
-├── app/
-│   ├── Models/                # Car, FinancingProposalModel, Customer
-│   └── Livewire/             # Componentes Livewire
-│
-├── resources/
-│   └── views/livewire/       # Views dos componentes
-│
-├── database/
-│   └── migrations/           # Estrutura do banco de dados
-│
-├── routes/
-│   └── web.php               # Rotas do sistema
