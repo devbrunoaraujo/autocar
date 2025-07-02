@@ -1,8 +1,10 @@
 <section id="contact" class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-steel-blue mb-4">Entre em Contato</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-steel-blue mb-4 bg-gradient-to-r from-steel-blue to-blue-600 bg-clip-text text-transparent">Entre em Contato</h2>
             <p class="text-gray-600 text-lg">Estamos prontos para atender você</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-electric-blue to-steel-blue mx-auto mt-6 rounded-full"></div>
+
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>

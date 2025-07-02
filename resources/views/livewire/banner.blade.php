@@ -127,7 +127,7 @@
     </section>
 
     <!-- BANNER PROMOCIONAL COM SLIDER -->
-    <section class="bg-gray-50 py-16" x-data="{
+    <section class="bg-gray-50 py-8 sm:py-12 lg:py-16" x-data="{
         currentSlide: 0,
         slides: [
             { title: 'Financiamento 0% Juros', color: 'red' },
@@ -151,45 +151,45 @@
     }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Título da seção -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    <i class="fas fa-fire text-red-500 mr-3"></i>
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-fire text-red-500 mr-2 sm:mr-3"></i>
                     Ofertas Imperdíveis
                 </h2>
-                <p class="text-gray-600 text-lg">Promoções exclusivas por tempo limitado</p>
+                <p class="text-gray-600 text-base sm:text-lg">Promoções exclusivas por tempo limitado</p>
             </div>
 
             <!-- Slider Container CORRIGIDO -->
-            <div class="relative overflow-hidden rounded-2xl shadow-2xl bg-gray-800">
-                <!-- Slides Container com altura fixa -->
-                <div class="relative h-64 md:h-80">
+            <div class="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl bg-gray-800">
+                <!-- Slides Container com altura responsiva -->
+                <div class="relative h-80 sm:h-64 md:h-80 lg:h-96">
                     <!-- Slides com posicionamento absoluto -->
                     <div class="absolute inset-0 flex transition-transform duration-700 ease-in-out will-change-transform"
                         :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
 
                         <!-- Slide 1 - Financiamento 0% -->
                         <div class="w-full flex-shrink-0 relative min-h-full">
-                            <div class="bg-gradient-to-r from-red-600 to-red-800 text-white h-full flex items-center p-8 md:p-12">
-                                <div class="grid md:grid-cols-2 gap-8 items-center w-full">
-                                    <div>
-                                        <div class="inline-block bg-yellow-400 text-red-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            <div class="bg-gradient-to-r from-red-600 to-red-800 text-white h-full flex items-center p-4 sm:p-6 md:p-8 lg:p-12">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center w-full">
+                                    <div class="text-center md:text-left">
+                                        <div class="inline-block bg-yellow-400 text-red-800 px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-3 sm:mb-4">
                                             🔥 SUPER OFERTA
                                         </div>
-                                        <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                                        <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">
                                             Financiamento com
-                                            <span class="text-yellow-400">0% de Juros</span>
+                                            <span class="text-yellow-400 block sm:inline">0% de Juros</span>
                                         </h3>
-                                        <p class="text-xl mb-6 text-red-100">
+                                        <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 text-red-100 leading-relaxed">
                                             Para veículos selecionados. Condições especiais para você realizar o sonho do carro próprio!
                                         </p>
                                         <button onclick="alert('Ver Condições')"
-                                            class="bg-yellow-400 hover:bg-yellow-500 text-red-800 font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105">
+                                            class="bg-yellow-400 hover:bg-yellow-500 text-red-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all transform hover:scale-105 text-sm sm:text-base">
                                             Ver Condições
                                         </button>
                                     </div>
-                                    <div class="text-center">
-                                        <div class="text-6xl md:text-8xl font-black opacity-20">0%</div>
-                                        <i class="fas fa-percentage text-6xl text-yellow-400"></i>
+                                    <div class="text-center order-first md:order-last">
+                                        <div class="text-4xl sm:text-6xl md:text-8xl font-black opacity-20">0%</div>
+                                        <i class="fas fa-percentage text-3xl sm:text-4xl md:text-6xl text-yellow-400"></i>
                                     </div>
                                 </div>
                             </div>
@@ -197,27 +197,27 @@
 
                         <!-- Slide 2 - Desconto -->
                         <div class="w-full flex-shrink-0 relative min-h-full">
-                            <div class="bg-gradient-to-r from-green-600 to-green-800 text-white h-full flex items-center p-8 md:p-12">
-                                <div class="grid md:grid-cols-2 gap-8 items-center w-full">
-                                    <div>
-                                        <div class="inline-block bg-yellow-400 text-green-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            <div class="bg-gradient-to-r from-green-600 to-green-800 text-white h-full flex items-center p-4 sm:p-6 md:p-8 lg:p-12">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center w-full">
+                                    <div class="text-center md:text-left">
+                                        <div class="inline-block bg-yellow-400 text-green-800 px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-3 sm:mb-4">
                                             💰 DESCONTO ESPECIAL
                                         </div>
-                                        <h3 class="text-3xl md:text-4xl font-bold mb-4">
-                                            Até <span class="text-yellow-400">R$ 15.000</span>
-                                            de Desconto
+                                        <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">
+                                            Até <span class="text-yellow-400 block sm:inline">R$ 15.000</span>
+                                            <span class="block sm:inline">de Desconto</span>
                                         </h3>
-                                        <p class="text-xl mb-6 text-green-100">
+                                        <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 text-green-100 leading-relaxed">
                                             Na troca do seu veículo usado. Avaliação gratuita e valor justo garantido!
                                         </p>
                                         <button onclick="alert('Avaliar Meu Carro')"
-                                            class="bg-yellow-400 hover:bg-yellow-500 text-green-800 font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105">
+                                            class="bg-yellow-400 hover:bg-yellow-500 text-green-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all transform hover:scale-105 text-sm sm:text-base">
                                             Avaliar Meu Carro
                                         </button>
                                     </div>
-                                    <div class="text-center">
-                                        <i class="fas fa-tags text-6xl text-yellow-400 mb-4"></i>
-                                        <div class="text-2xl font-bold">Avaliação Gratuita</div>
+                                    <div class="text-center order-first md:order-last">
+                                        <i class="fas fa-tags text-3xl sm:text-4xl md:text-6xl text-yellow-400 mb-2 sm:mb-4"></i>
+                                        <div class="text-lg sm:text-xl md:text-2xl font-bold">Avaliação Gratuita</div>
                                     </div>
                                 </div>
                             </div>
@@ -225,27 +225,27 @@
 
                         <!-- Slide 3 - Aprovação Rápida -->
                         <div class="w-full flex-shrink-0 relative min-h-full">
-                            <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white h-full flex items-center p-8 md:p-12">
-                                <div class="grid md:grid-cols-2 gap-8 items-center w-full">
-                                    <div>
-                                        <div class="inline-block bg-yellow-400 text-blue-800 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white h-full flex items-center p-4 sm:p-6 md:p-8 lg:p-12">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center w-full">
+                                    <div class="text-center md:text-left">
+                                        <div class="inline-block bg-yellow-400 text-blue-800 px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-3 sm:mb-4">
                                             ⚡ APROVAÇÃO RÁPIDA
                                         </div>
-                                        <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                                        <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">
                                             Crédito Aprovado em
-                                            <span class="text-yellow-400">24 Horas</span>
+                                            <span class="text-yellow-400 block sm:inline">24 Horas</span>
                                         </h3>
-                                        <p class="text-xl mb-6 text-blue-100">
+                                        <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 text-blue-100 leading-relaxed">
                                             Processo 100% digital. Documentação simplificada para você sair dirigindo mais rápido!
                                         </p>
                                         <button onclick="alert('Solicitar Crédito')"
-                                            class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105">
+                                            class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all transform hover:scale-105 text-sm sm:text-base">
                                             Solicitar Crédito
                                         </button>
                                     </div>
-                                    <div class="text-center">
-                                        <i class="fas fa-clock text-6xl text-yellow-400 mb-4"></i>
-                                        <div class="text-2xl font-bold">Processo Digital</div>
+                                    <div class="text-center order-first md:order-last">
+                                        <i class="fas fa-clock text-3xl sm:text-4xl md:text-6xl text-yellow-400 mb-2 sm:mb-4"></i>
+                                        <div class="text-lg sm:text-xl md:text-2xl font-bold">Processo Digital</div>
                                     </div>
                                 </div>
                             </div>
@@ -255,12 +255,12 @@
 
                 <!-- Navegação - Setas -->
                 <button @click="prevSlide()"
-                    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all backdrop-blur-sm z-10">
-                    <i class="fas fa-chevron-left"></i>
+                    class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 sm:p-3 rounded-full transition-all backdrop-blur-sm z-10">
+                    <i class="fas fa-chevron-left text-sm sm:text-base"></i>
                 </button>
                 <button @click="nextSlide()"
-                    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all backdrop-blur-sm z-10">
-                    <i class="fas fa-chevron-right"></i>
+                    class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 sm:p-3 rounded-full transition-all backdrop-blur-sm z-10">
+                    <i class="fas fa-chevron-right text-sm sm:text-base"></i>
                 </button>
 
                 <!-- Indicadores -->
@@ -268,38 +268,38 @@
                     <template x-for="(slide, index) in slides" :key="index">
                         <button @click="goToSlide(index)" 
                             :class="currentSlide === index ? 'bg-white' : 'bg-white/50'"
-                            class="w-3 h-3 rounded-full transition-all hover:bg-white/80"></button>
+                            class="w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all hover:bg-white/80"></button>
                     </template>
                 </div>
             </div>
 
             <!-- Cards de destaque abaixo do slider -->
-            <div class="grid md:grid-cols-3 gap-6 mt-12">
-                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
                     onclick="alert('Mostrar Garantia')">
                     <div class="text-center">
-                        <i class="fas fa-shield-alt text-3xl text-green-500 mb-4"></i>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Garantia Estendida</h4>
-                        <p class="text-gray-600">Proteção completa para seu veículo</p>
+                        <i class="fas fa-shield-alt text-2xl sm:text-3xl text-green-500 mb-3 sm:mb-4"></i>
+                        <h4 class="text-base sm:text-lg font-bold text-gray-800 mb-2">Garantia Estendida</h4>
+                        <p class="text-sm sm:text-base text-gray-600">Proteção completa para seu veículo</p>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
                     onclick="alert('Agendar Revisão')">
                     <div class="text-center">
-                        <i class="fas fa-tools text-3xl text-blue-500 mb-4"></i>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Revisão Gratuita</h4>
-                        <p class="text-gray-600">Primeira revisão por nossa conta</p>
+                        <i class="fas fa-tools text-2xl sm:text-3xl text-blue-500 mb-3 sm:mb-4"></i>
+                        <h4 class="text-base sm:text-lg font-bold text-gray-800 mb-2">Revisão Gratuita</h4>
+                        <p class="text-sm sm:text-base text-gray-600">Primeira revisão por nossa conta</p>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer"
                     onclick="alert('Abrir Suporte')">
                     <div class="text-center">
-                        <i class="fas fa-headset text-3xl text-purple-500 mb-4"></i>
-                        <h4 class="text-lg font-bold text-gray-800 mb-2">Suporte 24/7</h4>
-                        <p class="text-gray-600">Atendimento sempre que precisar</p>
+                        <i class="fas fa-headset text-2xl sm:text-3xl text-purple-500 mb-3 sm:mb-4"></i>
+                        <h4 class="text-base sm:text-lg font-bold text-gray-800 mb-2">Suporte 24/7</h4>
+                        <p class="text-sm sm:text-base text-gray-600">Atendimento sempre que precisar</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> 
 </div>

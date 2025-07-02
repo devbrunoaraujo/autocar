@@ -5,9 +5,13 @@
                 <h2
                     class="text-3xl md:text-4xl font-bold text-steel-blue mb-4
                        bg-gradient-to-r from-steel-blue to-blue-600 bg-clip-text text-transparent">
-                    Veículos em Destaque
+                    Estoque
                 </h2>
-                <p class="text-gray-600 text-lg font-medium">Seleções especiais com as melhores condições</p>
+                <p class="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed">
+                Seleções especiais com as melhores condições
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-electric-blue to-steel-blue mx-auto mt-6 rounded-full"></div>
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" x-data="{
